@@ -1,0 +1,302 @@
+body {
+    --background-color: #3A3A3A;
+    --secondary-background-color: #272626;
+
+    --text-color: #D9D9D9;
+    --text-color-hover: #999999;
+    --secondary-text-color: #000;
+
+    --icon-help-background-color: #146350;
+    --icon-help-background-color-hover: #A0CCC1;
+    --icon-help-color: #D9D9D9;
+    --icon-help-color-hover: #000;
+    --icon-menu-background-color: #D2C3FE;
+    --icon-menu-color: #000;
+    --icon-send-background-color: #6D4E85;
+    --icon-send-background-color-hover: #D2C3FE;
+    --icon-send-color: #D9D9D9;
+    --icon-send-color-hover: #000;
+
+    --button-background-color: #D9D9D9;
+    --button-background-color-hover: #999999;
+    --button-text-color: #000;
+    --button-icon-send-background-color: #272626;
+    --button-icon-send-background-color-hover: #848484;
+    --button-icon-send-color: #D9D9D9;
+    --button-icon-send-color-hover: #000;
+
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 24px;
+}
+
+/* Default Styles */
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.filler {
+    flex: 1;
+}
+
+input {
+    all:unset;
+    font-size: 24px;
+    background-color: transparent;
+    border: 2px solid #D9D9D9;
+    padding: 10px 10px 10px 25px;
+    margin: 20px;
+    border-radius: 25px;
+}
+
+input::placeholder{
+    all:unset;
+    color: var(--text-color);
+}
+
+button {
+    all: unset;
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    font-size: 24px;
+    border-radius: 25px;
+    padding: 10px;
+    margin: 10px;
+}
+
+button:hover, button.on{
+    background-color: var(--button-background-color-hover);
+}
+
+a, a:visited {
+    color: var(--text-color);
+}
+
+a:hover {
+    color: var(--text-color-hover);
+}
+
+textarea {
+    all: unset;
+    font-size: 24px;
+    background-color: transparent;
+    border: 2px solid #D9D9D9;
+    padding: 15px 25px;
+    margin: 20px;
+    border-radius: 25px;
+    width: 100%; 
+    box-sizing: border-box;
+    max-height: 60px;
+    white-space: pre-wrap; /* Behält Leerzeichen und Zeilenumbrüche bei */
+    word-wrap: break-word;
+}
+
+textarea::placeholder {
+    all: unset;
+    text-align: start;
+    color: var(--text-color);
+}
+
+
+/* icon default settings */
+div.icon {
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    aspect-ratio: 1 / 1;
+}
+
+/* icon help */
+div.icon.help {
+    background-color: var(--icon-help-background-color);
+    & svg {
+        fill: var(--icon-help-color);
+    }
+}
+
+div.icon.help:hover{
+    background-color: var(--icon-help-background-color-hover);
+
+    & svg {
+        fill: var(--icon-help-color-hover);
+    }
+}
+
+/* icon menu */
+div.icon.menu {
+    background-color: var(--icon-menu-background-color);
+
+    & svg {
+        fill: var(--icon-menu-color);
+    }
+}
+
+div.icon.menu:hover{
+    transform: rotate(90deg);
+    transition-duration: 300ms;
+}
+
+/* icon button */
+div.icon.button {
+    background-color: var(--button-icon-send-background-color);
+    margin: 0px;
+
+    & svg {
+        fill: var(--button-icon-send-color);
+    }
+}
+
+button:hover div.icon.button, button.on div.icon.button {
+    background-color: var(--button-icon-send-background-color-hover);
+
+    & svg {
+        fill: var(--button-icon-send-color-hover);
+    }
+}
+
+/* icon send */
+div.icon.send {
+    background-color: var(--icon-send-background-color);
+
+    & svg {
+        fill: var(--icon-send-color);
+    }
+}
+
+div.icon.send:hover, button:hover div.icon.send{
+    background-color: var(--icon-send-background-color-hover);
+    transform: rotate(-90deg);
+    transition-duration: 300ms;
+
+    & svg {
+        fill: var(--icon-send-color-hover);
+    }
+}
+
+/* Sidebar */
+
+div.sidebar {
+    --button-background-color: var(--background-color);
+
+    background-color: var(--secondary-background-color);
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 5%;
+    padding-bottom: 5%;
+
+    & .button_collection{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        & button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--text-color);
+            -webkit-box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
+            box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
+            padding-left: 30px;
+        }
+
+        & button:hover, button.on {
+            color: var(--secondary-text-color);
+        }
+        
+    }
+
+    & .icon.help {
+        align-self: center;
+    }
+}
+
+/* Chat - main */
+div.chat {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    & .icon.menu {
+        align-self: flex-end;
+        margin:5% 5% 0px 0px;
+    }
+
+    & button {
+        all: unset;
+    }
+
+    & .prompt.inputfield {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-self: center;
+        margin-bottom: 5%;
+    }
+
+    & textarea {
+        width: 75%;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
+
+/* Login Styles */
+
+.login.container {
+    flex: 1;
+    background-color: var(--secondary-background-color);
+    align-items: center;
+    flex-direction: column;
+    border-radius: 25px;
+    height: 75%;
+    align-self: center;
+
+    & h1 {
+        all: unset;
+        font-weight: bold;
+        font-size: 48px;
+        margin: 60px 0px 50px 0px;
+    }
+
+    & form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    & button {
+        width: 230px;
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 60px;
+    }
+
+    & input {
+        width: 400px;
+        margin-left: 60px;
+        margin-right: 60px;
+    }
+
+}
+
+.filler:has(.icon.help){
+    display: flex;
+    justify-content: flex-end;
+}
