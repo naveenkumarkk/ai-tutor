@@ -29,6 +29,8 @@ class LoadData {
             //TODO fetch messages from DB - we need to know which was an answer & which a prompt to which topic
             //TODO fetch message response from AI, display and save in DB
         }
+
+        scrollToBottom();
     }
 
     addPromptAnswer(prompt, answer) {
@@ -57,6 +59,28 @@ class LoadData {
         `;
         return answerContainer;
     }
+}
+
+function scrollToBottom(timedelay=0) {
+    var scrollId;
+    var height = 0;
+    var minScrollHeight = 100;
+    scrollId = setInterval(function () {
+        if (height <= document.body.scrollHeight) {
+            window.scrollBy(0, minScrollHeight);
+        }
+        else {
+            clearInterval(scrollId);
+        }
+        height += minScrollHeight;
+    }, timedelay);   
+    
+    // MORE Smoothly: 
+    // const answerContainers = document.querySelectorAll('.answer_container');
+    // if (answerContainers.length > 0) {
+    //   const lastAnswerContainer = answerContainers[answerContainers.length - 1];
+    //   lastAnswerContainer.scrollIntoView({ behavior: 'smooth' });
+    // }
 }
 
 export default LoadData;
