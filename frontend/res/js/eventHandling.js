@@ -48,3 +48,8 @@ document.getElementById("monitoring").addEventListener("click", clickMonitoring)
 document.getElementById("reflecting").addEventListener("click", clickReflecting);
 document.getElementById("tips").addEventListener("click", clickTips);
 document.getElementById("promptInput").addEventListener("submit", submitForm);
+document.addEventListener('keydown', function(event) {
+    if ((event.key === 'Enter') && (event.metaKey || event.ctrlKey) && document.getElementById("prompt").value.trim() !== '') {
+        submitForm(event);
+    }
+});
