@@ -109,6 +109,12 @@ textarea::placeholder {
     color: var(--text-color);
 }
 
+h1 {
+    all: unset;
+    font-weight: bold;
+    font-size: 48px;
+}
+
 
 /* icon default settings */
 div.icon {
@@ -333,9 +339,6 @@ div.chat {
     align-self: center;
 
     & h1 {
-        all: unset;
-        font-weight: bold;
-        font-size: 48px;
         margin: 60px 0px 50px 0px;
     }
 
@@ -363,4 +366,44 @@ div.chat {
 .filler:has(.icon.help){
     display: flex;
     justify-content: flex-end;
+}
+
+/* Help Styles */
+body.help {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    & div.chat.help {
+        width: 100%;
+    }
+
+    & .button_like_link{
+        background-color: var(--button-background-color);
+        color: var(--button-text-color) !important;
+        font-size: 24px;
+        border-radius: 25px;
+        padding: 10px 30px;
+        margin: 10px;
+    }
+    
+    & .button_like_link:hover {
+        background-color: var(--button-background-color-hover);
+    }
+
+    & .further_info {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    & .end {
+        margin-bottom: 5%;
+        margin-top: -5%;
+    }
+
+    & .begin {
+        margin-top: 5%;
+    }
 }
