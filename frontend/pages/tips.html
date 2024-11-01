@@ -54,8 +54,47 @@
                 </svg>
             </div>
             <div class="messages">
-
+                <p class="prompt">Here will be a prompt about how to use planning side!</p>
+                <div class="answer_container">
+                    <div class="icon logo">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+                            <path d="M280-280h160v-160H280v160Zm240 0h160v-160H520v160ZM280-520h160v-160H280v160Zm240 0h160v-160H520v160ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/>
+                        </svg>
+                    </div>
+                    <p class="answer">Here will be a example answer about the planning prompt. This sentence is so we can see how a log answer paragraph will be displayed.</p>
+                </div>
+                <p class="prompt">Here will be a prompt about how to use monitoring side!</p>
+                <div class="answer_container">
+                    <div class="icon logo">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+                            <path d="M280-280h160v-160H280v160Zm240 0h160v-160H520v160ZM280-520h160v-160H280v160Zm240 0h160v-160H520v160ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/>
+                        </svg>
+                    </div>
+                    <p class="answer">Here will be a example answer about the monitoring prompt.</p>
+                </div>
+                <p class="prompt">Here will be a prompt about how to use reflecting side!</p>
+                <div class="answer_container">
+                    <div class="icon logo">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+                            <path d="M280-280h160v-160H280v160Zm240 0h160v-160H520v160ZM280-520h160v-160H280v160Zm240 0h160v-160H520v160ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/>
+                        </svg>
+                    </div>
+                    <p class="answer">Here will be a example answer about the reflecting prompt.</p>
+                </div>
             </div>
+            <form>
+                <!--TODO: onsubmit="submitPrompt(event)"-->
+                <div class="prompt inputfield">
+                    <textarea value="" placeholder="Message AI Tutor" id="prompt" required></textarea>
+                    <button type="submit">
+                        <div class="icon send">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+                                <path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"/>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </body>

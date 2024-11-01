@@ -25,6 +25,8 @@ body {
     --button-icon-send-color: #D9D9D9;
     --button-icon-send-color-hover: #000;
 
+    --message-background-color: rgba(217, 217, 217, 0.5);
+
     background-color: var(--background-color);
     color: var(--text-color);
     margin: 0;
@@ -40,6 +42,8 @@ body {
 .container {
     display: flex;
     height: 100vh;
+    width: 100%;
+    justify-content: flex-end;
 }
 
 .filler {
@@ -96,6 +100,7 @@ textarea {
     max-height: 60px;
     white-space: pre-wrap; /* Behält Leerzeichen und Zeilenumbrüche bei */
     word-wrap: break-word;
+    backdrop-filter: blur(5px);
 }
 
 textarea::placeholder {
@@ -136,6 +141,9 @@ div.icon.help:hover{
 /* icon menu */
 div.icon.menu {
     background-color: var(--icon-menu-background-color);
+    position: fixed;
+    top: 0;
+    right: 0;
 
     & svg {
         fill: var(--icon-menu-color);
@@ -184,6 +192,15 @@ div.icon.send:hover, button:hover div.icon.send{
     }
 }
 
+/* icon logo */
+div.icon.logo {
+    background-color: var(--icon-help-background-color);
+
+    & svg {
+        fill: var(--icon-help-color);
+    }
+}
+
 /* Sidebar */
 
 div.sidebar {
@@ -191,15 +208,17 @@ div.sidebar {
 
     background-color: var(--secondary-background-color);
     padding: 20px;
-    flex: 1;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 20%;
     justify-content: space-between;
-    padding-top: 5%;
-    padding-bottom: 5%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
 
     & .button_collection{
+        margin-top: 30%;
         display: flex;
         flex-direction: column;
         gap: 20px;
@@ -223,19 +242,21 @@ div.sidebar {
 
     & .icon.help {
         align-self: center;
+        margin-bottom: 20%;
     }
 }
 
 /* Chat - main */
 div.chat {
-    flex: 3;
+    width: 80%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     & .icon.menu {
         align-self: flex-end;
-        margin:5% 5% 0px 0px;
+        margin:2% 2% 0px 0px;
     }
 
     & button {
@@ -247,13 +268,56 @@ div.chat {
         justify-content: center;
         align-content: center;
         align-self: center;
-        margin-bottom: 5%;
+        margin-bottom: 2%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        margin-left: 33%;
+        width: 60%;
     }
 
     & textarea {
         width: 75%;
         margin-left: 0px;
         margin-right: 0px;
+    }
+
+    & .messages{
+        color: var(--secondary-text-color);
+        display: flex;
+        flex-direction: column;
+        margin-top: 5%;
+        height: 100%;
+        margin-right: 10%;
+        margin-left: 10%;
+
+        & p {
+            background-color: var(--message-background-color);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 25px;
+            display:inline-block;
+            text-wrap: wrap;
+            max-width: 60%;
+            line-height: 35px;
+        }
+
+        & .prompt {
+            align-self: flex-end;
+        }
+
+        & .icon.logo {
+            margin: 0px 20px;
+        }
+
+        & .answer_container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        & .answer_container:last-of-type p {
+            margin-bottom: 20%;
+        }
     }
 }
 

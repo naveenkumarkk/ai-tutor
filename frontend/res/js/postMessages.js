@@ -1,5 +1,8 @@
 window.onload = async function() {
 
+    //TODO: make sure only those who are logged in can access the tutor
+    // all of the other should be redirected to the login page
+
     // Setting active element
     activeElement = document.getElementsByClassName("on");
     activeSelection = sessionStorage.getItem('activeElement');
