@@ -188,11 +188,6 @@ div.icon.menu {
     }
 }
 
-div.icon.menu:hover{
-    transform: rotate(90deg);
-    transition-duration: 300ms;
-}
-
 /* icon button */
 div.icon.button {
     background-color: var(--button-icon-send-background-color);
@@ -396,8 +391,14 @@ div.chat {
 }
 
 .filler:has(.icon.help){
-    display: flex;
-    justify-content: flex-end;
+    /*display: flex;
+    justify-content: flex-end;*/
+    & .icon.help {
+        position: fixed;
+        top: 0;
+        right: 0;
+        margin: 2% 7% 0px 0px; 
+    }
 }
 
 /* Help Styles */
@@ -438,4 +439,99 @@ body.help {
     & .begin {
         margin-top: 5%;
     }
+}
+
+/* Menu Styles */
+
+#menu_container {
+    & .overlay {
+        background-color: var(--secondary-background-color);
+        padding: 5% 5% 2% 5%;
+    }
+}
+#menu_container:not(.open){
+    & .overlay {
+        display: none;
+    }
+}
+
+#menu_container.open {
+    & div.icon.menu{
+        transform: rotate(90deg);
+        transition-duration: 300ms;
+    }
+
+    & .overlay {
+        display: flex;
+        justify-content: space-around;
+    }
+    
+}
+
+label {
+	width: 200px;
+	height: 80px;
+	position: relative;
+	display: block;
+	background: #ebebeb;
+	border-radius: 80px;
+	box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4),
+		inset 0px -5px 15px rgba(255, 255, 255, 0.4);
+	cursor: pointer;
+	transition: 0.3s;
+	&:after {
+		content: "";
+		width: 60px;
+		height: 60px;
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		background: linear-gradient(180deg, #ffcc89, #d8860b);
+		border-radius: 60px;
+		box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+		transition: 0.3s;
+	}
+	svg {
+		position: absolute;
+		width: 40px;
+		top: 40px;
+		z-index: 100;
+		&.sun {
+			left: 20px;
+            top: 20px;
+			fill: #fff;
+			transition: 0.3s;
+		}
+		&.moon {
+			left: 140px;
+            top: 20px;
+			fill: #7e7e7e;
+			transition: 0.3s;
+		}
+	}
+}
+
+input {
+	width: 0;
+	height: 0;
+	visibility: hidden;
+	&:checked + label {
+		background: #242424;
+		&:after {
+			left: 190px;
+			transform: translateX(-100%);
+			background: linear-gradient(180deg, #777, #3a3a3a);
+		}
+		svg {
+			&.sun {
+				fill: #7e7e7e;
+			}
+			&.moon {
+				fill: #fff;
+			}
+		}
+	}
+	&:active:after {
+		width: 260px;
+	}
 }
