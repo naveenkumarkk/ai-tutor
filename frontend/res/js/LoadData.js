@@ -6,7 +6,7 @@ class LoadData {
     }
 
     loadData() {
-        const activeElement = sessionStorage.getItem("activeElement");
+        const activeElement = localStorage.getItem("activeElement");
 
         if (activeElement === "monitoring") {
             // Render monitoring

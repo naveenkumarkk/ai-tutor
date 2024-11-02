@@ -1,44 +1,4 @@
 body {
-    --background-color: #3A3A3A;
-    --secondary-background-color: #272626;
-
-    --text-color: #D9D9D9;
-    --text-color-hover: #999999;
-    --secondary-text-color: #000;
-
-    --icon-help-background-color: #146350;
-    --icon-help-background-color-hover: #A0CCC1;
-    --icon-help-color: #D9D9D9;
-    --icon-help-color-hover: #000;
-    --icon-menu-background-color: #D2C3FE;
-    --icon-menu-color: #000;
-    --icon-send-background-color: #6D4E85;
-    --icon-send-background-color-hover: #D2C3FE;
-    --icon-send-color: #D9D9D9;
-    --icon-send-color-hover: #000;
-
-    --button-background-color: #D9D9D9;
-    --button-background-color-hover: #999999;
-    --button-text-color: #000;
-    --button-icon-send-background-color: #272626;
-    --button-icon-send-background-color-hover: #848484;
-    --button-icon-send-color: #D9D9D9;
-    --button-icon-send-color-hover: #000;
-
-    --message-background-color: rgba(217, 217, 217, 0.5);
-    --border-color: #D9D9D9;
-
-    background-color: var(--background-color);
-    color: var(--text-color);
-    margin: 0;
-
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-size: 24px;
-}
-
-body.light {
     --background-color: #d3d3d3;
     --secondary-background-color: #adadad;
 
@@ -67,6 +27,46 @@ body.light {
     
     --message-background-color: rgba(186, 186, 186, 0.5);
     --border-color: #999999;
+
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 24px;
+}
+
+body.dark-mode{
+    --background-color: #3A3A3A;
+    --secondary-background-color: #272626;
+
+    --text-color: #D9D9D9;
+    --text-color-hover: #999999;
+    --secondary-text-color: #000;
+
+    --icon-help-background-color: #146350;
+    --icon-help-background-color-hover: #A0CCC1;
+    --icon-help-color: #D9D9D9;
+    --icon-help-color-hover: #000;
+    --icon-menu-background-color: #D2C3FE;
+    --icon-menu-color: #000;
+    --icon-send-background-color: #6D4E85;
+    --icon-send-background-color-hover: #D2C3FE;
+    --icon-send-color: #D9D9D9;
+    --icon-send-color-hover: #000;
+
+    --button-background-color: #D9D9D9;
+    --button-background-color-hover: #999999;
+    --button-text-color: #000;
+    --button-icon-send-background-color: #272626;
+    --button-icon-send-background-color-hover: #848484;
+    --button-icon-send-color: #D9D9D9;
+    --button-icon-send-color-hover: #000;
+
+    --message-background-color: rgba(217, 217, 217, 0.5);
+    --border-color: #D9D9D9;
 }
 
 /* Default Styles */
@@ -468,7 +468,7 @@ body.help {
     
 }
 
-label {
+label#darkmode-toggle {
 	width: 200px;
 	height: 80px;
 	position: relative;
@@ -511,7 +511,7 @@ label {
 	}
 }
 
-input {
+input#darkmode-toggle {
 	width: 0;
 	height: 0;
 	visibility: hidden;

@@ -1,6 +1,8 @@
 import ClickEvents from "./ClickEvents.js";
+import GeneralFunctions from "./GeneralFunctions.js";
 
 const click = new ClickEvents();
+const generalFunctions = new GeneralFunctions();
 
 function clickPlanning (event) {
     click.clickPlanning();
@@ -15,6 +17,10 @@ function clickMonitoring (event) {
 function clickReflecting (event) {
     click.clickReflecting();
     window.location.href = "../../../frontend/pages/main.html";
+}
+
+window.onload = async function () {
+    generalFunctions.toggleDarkmode();
 }
 
 document.getElementById("planning").addEventListener("click", clickPlanning);

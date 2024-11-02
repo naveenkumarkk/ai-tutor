@@ -1,6 +1,8 @@
 import LoadData from "./LoadData.js";
+import GeneralFunctions from "./GeneralFunctions.js";
 
 const loadDataFromBackend = new LoadData();
+const generalFunctions = new GeneralFunctions();
 
 window.onload = async function() {
 
@@ -9,9 +11,9 @@ window.onload = async function() {
 
     // Setting active element
     let activeElement = document.getElementsByClassName("on");
-    let activeSelection = sessionStorage.getItem('activeElement');
+    let activeSelection = localStorage.getItem('activeElement');
     setActiveElement(activeElement, activeSelection);
-
+    generalFunctions.toggleDarkmode();
     loadDataFromBackend.loadData();
 }
 
