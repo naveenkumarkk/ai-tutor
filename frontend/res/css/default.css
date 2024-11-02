@@ -26,6 +26,7 @@ body {
     --button-icon-send-color-hover: #000;
 
     --message-background-color: rgba(217, 217, 217, 0.5);
+    --border-color: #D9D9D9;
 
     background-color: var(--background-color);
     color: var(--text-color);
@@ -35,6 +36,37 @@ body {
     font-optical-sizing: auto;
     font-style: normal;
     font-size: 24px;
+}
+
+body.light {
+    --background-color: #d3d3d3;
+    --secondary-background-color: #adadad;
+
+    --text-color: #000000;
+    --text-color-hover: #3c3c3c;
+    --secondary-text-color: #000;
+
+    --icon-help-background-color: #146350;
+    --icon-help-background-color-hover: #63a393;
+    --icon-help-color: #D9D9D9;
+    --icon-help-color-hover: #000;
+    --icon-menu-background-color: #a292d7;
+    --icon-menu-color: #000;
+    --icon-send-background-color: #6D4E85;
+    --icon-send-background-color-hover: #a292d7;
+    --icon-send-color: #D9D9D9;
+    --icon-send-color-hover: #000;
+
+    --button-background-color: #999999;
+    --button-background-color-hover: #999999;
+    --button-text-color: #000;
+    --button-icon-send-background-color: #848484;
+    --button-icon-send-background-color-hover: #3c3c3c;
+    --button-icon-send-color: #D9D9D9;
+    --button-icon-send-color-hover: #000;
+    
+    --message-background-color: rgba(186, 186, 186, 0.5);
+    --border-color: #999999;
 }
 
 /* Default Styles */
@@ -91,7 +123,7 @@ textarea {
     all: unset;
     font-size: 24px;
     background-color: var(--background-color);
-    border: 2px solid #D9D9D9;
+    border: 2px solid var(--border-color);
     padding: 15px 25px;
     margin: 20px;
     border-radius: 25px;
