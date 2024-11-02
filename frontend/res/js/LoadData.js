@@ -24,7 +24,7 @@ class LoadData {
             //TODO fetch messages from DB - we need to know which was an answer & which a prompt to which topic
             //TODO fetch message response from AI, display and save in DB
         
-        } else if (activeElement !== "tips") {
+        } else if (activeElement == "planning") {
             // Render planning
             document.title = "AI Tutor - Planning";
             this.addPromptAnswer("This is a planning prompt!", "This is a planning answer!");
@@ -33,6 +33,9 @@ class LoadData {
             //TODO fetch message response from AI, display and save in DB
         } else if (activeElement == "tips"){
             window.location.href = "../../../frontend/pages/tips.html";
+            return;
+        } else {
+            window.location.href = "../../../frontend/pages/login.html";
             return;
         }
 
