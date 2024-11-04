@@ -464,30 +464,31 @@ body.help {
     & .overlay {
         display: flex;
         justify-content: space-around;
+        align-items: center;
     }
     
 }
 
 label#darkmode-toggle {
-	width: 200px;
-	height: 80px;
+	width: 150px;
+	height: 60px;
 	position: relative;
 	display: block;
 	background: #ebebeb;
-	border-radius: 80px;
+	border-radius: 60px;
 	box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4),
 		inset 0px -5px 15px rgba(255, 255, 255, 0.4);
 	cursor: pointer;
 	transition: 0.3s;
 	&:after {
 		content: "";
-		width: 60px;
-		height: 60px;
+		width: 50px;
+		height: 50px;
 		position: absolute;
-		top: 10px;
-		left: 10px;
+		top: 5px;
+		left: 5px;
 		background: linear-gradient(180deg, #ffcc89, #d8860b);
-		border-radius: 60px;
+		border-radius: 40px;
 		box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 		transition: 0.3s;
 	}
@@ -497,14 +498,14 @@ label#darkmode-toggle {
 		top: 40px;
 		z-index: 100;
 		&.sun {
-			left: 20px;
-            top: 20px;
+			left: 10px;
+            top: 10px;
 			fill: #fff;
 			transition: 0.3s;
 		}
 		&.moon {
-			left: 140px;
-            top: 20px;
+			left: 100px;
+            top: 10px;
 			fill: #7e7e7e;
 			transition: 0.3s;
 		}
@@ -518,7 +519,7 @@ input#darkmode-toggle {
 	&:checked + label {
 		background: #242424;
 		&:after {
-			left: 190px;
+			left: 145px;
 			transform: translateX(-100%);
 			background: linear-gradient(180deg, #777, #3a3a3a);
 		}
