@@ -471,42 +471,39 @@ body.help {
 }
 
 label#darkmode-toggle {
-	width: 150px;
-	height: 60px;
+	width: 120px;
+	height: 40px;
 	position: relative;
 	display: block;
 	background: #ebebeb;
-	border-radius: 60px;
+	border-radius: 40px;
 	box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4),
 		inset 0px -5px 15px rgba(255, 255, 255, 0.4);
 	cursor: pointer;
 	transition: 0.3s;
 	&:after {
 		content: "";
-		width: 50px;
-		height: 50px;
+		width: 30px;
+		height: 30px;
 		position: absolute;
 		top: 5px;
 		left: 5px;
 		background: linear-gradient(180deg, #ffcc89, #d8860b);
-		border-radius: 40px;
+		border-radius: 20px;
 		box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 		transition: 0.3s;
 	}
 	svg {
 		position: absolute;
-		width: 40px;
-		top: 40px;
+		width: 30px;
 		z-index: 100;
 		&.sun {
-			left: 10px;
-            top: 10px;
+			left: 5px;
 			fill: #fff;
 			transition: 0.3s;
 		}
 		&.moon {
-			left: 100px;
-            top: 10px;
+			left: 85px;
 			fill: #7e7e7e;
 			transition: 0.3s;
 		}
@@ -520,7 +517,7 @@ input#darkmode-toggle {
 	&:checked + label {
 		background: #242424;
 		&:after {
-			left: 145px;
+			left: 115px;
 			transform: translateX(-100%);
 			background: linear-gradient(180deg, #777, #3a3a3a);
 		}
