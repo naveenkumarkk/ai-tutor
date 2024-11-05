@@ -333,6 +333,7 @@ div.chat {
             text-wrap: wrap;
             max-width: 60%;
             line-height: 35px;
+            word-wrap: break-word;
         }
 
         & .prompt {
