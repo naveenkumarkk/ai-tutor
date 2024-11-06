@@ -31,5 +31,5 @@ function handleLogout(event){
     window.location.href = "../../../frontend/pages/login.html";
 }
 
-document.getElementById("help").addEventListener("click", openHelpPage);
+document.getElementById("help")?.addEventListener("click", openHelpPage);
 document.getElementById("menu").addEventListener("click", openMenuPopup);

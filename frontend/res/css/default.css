@@ -147,6 +147,18 @@ h1 {
     font-size: 48px;
 }
 
+.button_like_link{
+    background-color: var(--button-background-color);
+    color: var(--button-text-color) !important;
+    font-size: 24px;
+    border-radius: 25px;
+    padding: 10px 30px;
+    margin: 10px;
+}
+
+.button_like_link:hover {
+    background-color: var(--button-background-color-hover);
+}
 
 /* icon default settings */
 div.icon {
@@ -410,19 +422,6 @@ body.help {
 
     & div.chat.help {
         width: 100%;
-    }
-
-    & .button_like_link{
-        background-color: var(--button-background-color);
-        color: var(--button-text-color) !important;
-        font-size: 24px;
-        border-radius: 25px;
-        padding: 10px 30px;
-        margin: 10px;
-    }
-    
-    & .button_like_link:hover {
-        background-color: var(--button-background-color-hover);
     }
 
     & .further_info {
