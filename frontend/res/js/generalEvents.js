@@ -3,7 +3,7 @@ function openHelpPage () {
 }
 
 function openMenuPopup () {
-    document.getElementById("menu_container").classList.toggle("open");
+    document.getElementById("menu_container")?.classList.toggle("open");
 
     const darkModeToggle = document.getElementById("darkmode-toggle");
 
@@ -22,7 +22,7 @@ function openMenuPopup () {
         }
     });
 
-    document.getElementById("logout").addEventListener("click", handleLogout);
+    document.getElementById("logout")?.addEventListener("click", handleLogout);
 }
 
 function handleLogout(event){
@@ -32,4 +32,4 @@ function handleLogout(event){
 }
 
 document.getElementById("help")?.addEventListener("click", openHelpPage);
-document.getElementById("menu").addEventListener("click", openMenuPopup);
+document.getElementById("menu")?.addEventListener("click", openMenuPopup);
