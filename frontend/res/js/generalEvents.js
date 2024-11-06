@@ -23,6 +23,7 @@ function openMenuPopup () {
     });
 
     document.getElementById("logout")?.addEventListener("click", handleLogout);
+    document.getElementById("goto_help")?.addEventListener("click", openHelpPage);
 }
 
 function handleLogout(event){
