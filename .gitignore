@@ -5,3 +5,6 @@
 /migrations/__pycache__
 /migrations
 .env
+/backend/auth/__pycache__
+/backend/__pycache__
+/backend/migrations/versions
