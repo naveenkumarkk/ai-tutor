@@ -25,6 +25,7 @@ body {
   --button-icon-send-color: #d9d9d9;
   --button-icon-send-color-hover: #000;
   --button-icon-mail-color: var(--text-color);
+  --button-icon-toggle-color: #d9d9d9;
 
   --message-background-color: rgba(186, 186, 186, 0.5);
   --border-color: #999999;
@@ -61,6 +62,7 @@ body.dark-mode {
   --icon-send-color: #d9d9d9;
   --icon-send-color-hover: #000;
   --button-icon-mail-color: var(--text-color);
+  --button-icon-toggle-color: #000;
 
   --button-background-color: #d9d9d9;
   --button-background-color-hover: #999999;
@@ -264,7 +266,7 @@ div.icon.toggle {
   box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
 
   & svg {
-      fill: var(--button-icon-send-color-hover);
+      fill: var(--button-icon-toggle-color);
   }
 }
 
@@ -505,6 +507,10 @@ body.help {
   & .end {
     margin-bottom: 5%;
     margin-top: -5%;
+
+    & .button_like_link {
+      margin-top: 30px;
+    }
   }
 
   & .begin {
