@@ -497,6 +497,10 @@ body.help {
   & .begin {
     margin-top: 5%;
   }
+
+  & .further_info.begin p {
+    text-align: center;
+  }
 }
 
 /* Menu Styles */
@@ -627,7 +631,7 @@ input#darkmode-toggle {
     display: flex;
   }
 
-  .button_like_link{
+  .overlay .button_like_link{
     width: 80px !important;
   }
 
@@ -725,7 +729,7 @@ input#darkmode-toggle {
     font-size: 17px;
   }
 
-  .button_like_link {
+  .overlay .button_like_link {
     width: 100px !important;
   }
 
