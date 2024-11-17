@@ -28,6 +28,9 @@ body {
   --message-background-color: rgba(186, 186, 186, 0.5);
   --border-color: #999999;
 
+  --sidebar-width: 250px;
+  --icon-width: 40px;
+
   background-color: var(--background-color);
   color: var(--text-color);
   margin: 0;
@@ -36,7 +39,6 @@ body {
   font-optical-sizing: auto;
   font-style: normal;
   font-size: 24px;
-  --sidebar-width: 250px;
 }
 
 body.dark-mode {
@@ -76,7 +78,7 @@ body.dark-mode {
   display: flex;
   height: 100vh;
   width: 100%;
-  /* justify-content: flex-end; */
+  justify-content: flex-end;
 }
 
 .filler {
@@ -165,8 +167,8 @@ h1 {
 
 /* icon default settings */
 div.icon {
-  width: 40px;
-  height: 40px;
+  width: var(--icon-width);
+  height: var(--icon-width);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -251,8 +253,24 @@ div.icon.logo {
   }
 }
 
-/* Sidebar */
+/* icon toggle */
+div.icon.toggle {
+  background-color: var(--button-icon-send-background-color-hover);
+  margin: 0px;
+  -webkit-box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
+  box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
 
+  & svg {
+      fill: var(--button-icon-send-color-hover);
+  }
+}
+
+div.icon.toggle:hover svg{
+  fill: var(--button-icon-send-color);
+}
+
+/* Sidebar */
 div.sidebar {
   --button-background-color: var(--background-color);
 
@@ -260,40 +278,63 @@ div.sidebar {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  width: 20%;
   justify-content: space-between;
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
 
-  & .button_collection {
-    margin-top: 30%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  & #toggleSidebar {
+      all: unset;
+      align-self: flex-end;
+  }
 
-    & button {
+  & .button_collection{
+      margin-top: 30%;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--text-color);
-      -webkit-box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
-      -moz-box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
-      box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
-      padding-left: 18px;
-    }
+      flex-direction: column;
+      gap: 20px;
 
-    & button:hover,
-    button.on {
-      color: var(--secondary-text-color);
-    }
+      & button {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          color: var(--text-color);
+          -webkit-box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
+          -moz-box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
+          box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
+          gap: 10px;
+      }
+
+      & button:hover, button.on {
+          color: var(--secondary-text-color);
+      }
   }
-
   & .icon.help {
-    align-self: center;
-    margin-bottom: 20%;
+      align-self: center;
+      margin-bottom: 20%;
   }
+}
+
+div.sidebar.folded {
+  background-color: rgba(0, 0, 0, 0);
+
+  & #toggleSidebar svg {
+      transform: rotate(180deg);
+  }
+
+  & .button_collection{
+      display: none;
+  }
+
+  & #help {
+      display: none;
+  }
+}
+
+div.sidebar:not(.folded){
+  width: fit-content;
+  z-index: 10;
 }
 
 /* Chat - main */
@@ -305,8 +346,7 @@ div.chat {
   justify-content: space-between;
 
   & .icon.menu {
-    align-self: flex-end;
-    margin: 2% 2% 0px 0px;
+    margin: 20px 20px 0px 0px;
   }
 
   & button {
@@ -335,7 +375,6 @@ div.chat {
   & .messages {
     color: var(--secondary-text-color);
     display: flex;
-    justify-content: center;
     flex-direction: column;
     margin-top: 5%;
     height: 100%;
@@ -370,6 +409,21 @@ div.chat {
     & .answer_container:last-of-type p {
       margin-bottom: 20%;
     }
+  }
+}
+
+div.chat.expanded {
+  width: 100%;
+  transition: width 0.1s ease;
+
+  & .prompt.inputfield {
+      margin-left: 0%;
+      left: 50%;
+      transform: translateX(-50%);
+  }
+
+  & #prompt {
+      width: 100%;
   }
 }
 
@@ -410,13 +464,11 @@ div.chat {
 }
 
 .filler:has(.icon.help) {
-  /*display: flex;
-    justify-content: flex-end;*/
   & .icon.help {
     position: fixed;
     top: 0;
     right: 0;
-    margin: 2% 7% 0px 0px;
+    margin: 20px 70px 0px 0px;
   }
 }
 
@@ -455,7 +507,7 @@ body.help {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin-top: 5%;
+    margin-top: calc(30px + var(--icon-width));
     margin-right: 2%;
     gap: 20px;
     top: 0;
@@ -557,53 +609,62 @@ input#darkmode-toggle {
     }
   }
   &:active:after {
-    width: 260px;
+    width: 120px;
   }
-}
-
-/* Sidebar Closed State for Mobile */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: -100%;
-  width: var(--sidebar-width);
-  height: 100%;
-  background-color: var(--secondary-background-color);
-  transition: left 0.3s ease;
-  z-index: 2;
-}
-
-/* Sidebar Open State */
-.sidebar.open {
-  left: 0;
-}
-
-/* Sidebar Button */
-#sidebar-toggle {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  background-color: var(--icon-menu-background-color);
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  z-index: 3;
-  cursor: pointer;
-}
-
-/* Icon Inside Toggle Button */
-#sidebar-toggle svg {
-  fill: var(--icon-menu-color);
 }
 
 /* Mobile devices (max-width: 600px) */
 @media (max-width: 600px) {
+  body {
+    --icon-width: 30px;
+  }
+
+  svg:not(.login) {
+    width: 70%;
+    height: 70%;
+  }
   #sidebar-toggle {
     display: flex;
   }
+
+  .button_like_link{
+    width: 80px !important;
+  }
+
+  label#darkmode-toggle {
+    width: 80px;
+    height: 32.5px;
+    border-radius: 32.5px;
+    &:after {
+      width: 22.5px;
+      height: 22.5px;
+      top: 5px;
+      left: 4px;
+      border-radius: 22.5px;
+    }
+    svg {
+      width: 22.5px;
+      top: 5px;
+      &.sun {
+        left: 4px;
+      }
+      &.moon {
+        left: 53px;
+      }
+    }
+  }
+  
+  input#darkmode-toggle {
+    &:checked + label {
+      &:after {
+        left: 75px;
+      }
+    }
+    &:active:after {
+      width: 80px;
+    }
+  }
+
 
   body {
     font-size: 16px;
@@ -614,50 +675,15 @@ input#darkmode-toggle {
     width: 100%;
   }
 
-  .sidebar {
-    width: 30% !important; 
-    visibility: hidden;
-    & .icon.help {
-      margin-bottom: 50px! important;
-    }
-    
-  }
-
-
-  .button_collection button {
-    width: 75%;
+  .button_collection button, .button_like_link {
     font-size: 12px;
-    /* padding: 8px; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    overflow: hidden;
-  }
-
-  .button_collection .button.icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .chat {
-    margin-top: 60px;
-    width: 100%;
-    padding: 0 10px;
-  }
-
-  .messages {
-    margin: 20px 0;
-  }
-
-  .prompt.inputfield {
-    width: 90%;
-    margin-left: 20% !important;
   }
 
   textarea {
-    width: 70%;
     font-size: 4vw;
+    padding: 10px;
+    max-height: 50px;
+    transition-duration: 300ms;
   }
 
   .icon.menu {
@@ -666,117 +692,110 @@ input#darkmode-toggle {
     top: 10px;
   }
 
-  
+  .login.container{
+    border-radius: 0px;
+    width: 100%;
+    overflow: hidden;
+    transition-duration: 300ms;
+
+    & input {
+        width: 75%;
+        transition-duration: 300ms;
+    }
+
+    & button {
+        width: 50%;
+    }
+  }
+
+  .filler {
+      flex: 0;
+  }
+
 }
 
 /* Tablet devices (min-width: 601px and max-width: 900px) */
 @media (min-width: 601px) and (max-width: 900px) {
-  #sidebar-toggle {
-    display: none;
-  }
-  .sidebar {
-    visibility: visible; /* Sidebar remains visible by default for larger screens */
-  }
 
   body {
     font-size: 18px;
   }
 
-  .container {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    width: 30%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    padding: 10px;
-  }
-
-  .button_collection button {
+  .button_collection button, .button_like_link {
     font-size: 17px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    overflow: hidden;
   }
 
-  .button_collection .button.icon {
-    width: 24px;
-    height: 24px;
+  .button_like_link {
+    width: 100px !important;
   }
 
-  .chat {
-    width: 70%;
-    margin-left: 30%;
-    margin-top: 20px;
+  label#darkmode-toggle {
+    width: 100px;
+    &:after {
+      left: 5px;
+    }
+    svg {
+      &.moon {
+        left: 63px;
+      }
+    }
   }
-
-  .messages {
-    margin: 20px 5%;
-  }
-
-  .prompt.inputfield {
-    width: 80%;
-    margin: 10px auto;
-  }
-
-  textarea {
-    width: 75%;
+  
+  input#darkmode-toggle {
+    &:checked + label {
+      &:after {
+        left: 95px;
+      }
+    }
+    &:active:after {
+      width: 100px;
+    }
   }
 }
 
 /* Desktop devices (min-width: 901px) */
 @media (min-width: 901px) {
-  #sidebar-toggle {
-    display: none;
-  }
-  .sidebar {
-    visibility: visible; /* Sidebar remains visible by default for larger screens */
-  }
 
   body {
     font-size: 20px;
   }
 
-  .sidebar {
-    width: 20%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    padding: 20px;
-  }
-
   .button_collection button {
     font-size: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
   }
+}
 
-  .button_collection .button.icon {
-    width: 28px;
-    height: 28px;
+@media(max-height: 565px){
+  .login.container {
+      height: 100%;
+      padding: 10px;
+      border-radius: 0px;
+      transition-duration: 300ms;
+
+      & button {
+          margin: 0px;
+      }
   }
+}
 
-  .chat {
-    width: 80%;
-    margin-left: 20%;
+@media(min-height: 566px){
+  .login.container{
+      transition-duration: 300ms;
   }
+}
 
-  .messages {
-    margin: 40px 10%;
-  }
+@media(max-width: 650px){
+  body.help {
+      & h1 {
+          max-width: 70%;
+      }
 
-  .prompt.inputfield {
-    width: 60%;
-    margin: 20px auto;
-  }
+      & .further_info.begin p {
+          margin-bottom: -20px;
+      }
 
-  textarea {
-    width: 75%;
+      & .further_info.end {
+          margin-top: -10%;
+      }
   }
 }
