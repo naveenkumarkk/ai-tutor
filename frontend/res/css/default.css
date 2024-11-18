@@ -836,7 +836,7 @@ input#darkmode-toggle {
           max-width: 70%;
       }
 
-      & .further_info.begin p {
+      & .further_info.begin button {
           margin-bottom: -20px;
       }
 
