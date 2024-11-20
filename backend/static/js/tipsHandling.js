@@ -6,17 +6,17 @@ const generalFunctions = new GeneralFunctions();
 
 function clickPlanning (event) {
     click.clickPlanning();
-    window.location.href = "../../../frontend/pages/main.html";
+    window.location.href = "/chatgpt/chatscreen";
 }
 
 function clickMonitoring (event) {
     click.clickMonitoring();
-    window.location.href = "../../../frontend/pages/main.html";
+    window.location.href = "/chatgpt/chatscreen";
 }
 
 function clickReflecting (event) {
     click.clickReflecting();
-    window.location.href = "../../../frontend/pages/main.html";
+    window.location.href = "/chatgpt/chatscreen";
 }
 
 window.onload = async function () {

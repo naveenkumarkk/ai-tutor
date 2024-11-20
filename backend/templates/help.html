@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../res/css/default.css">
-    <link rel="icon" type="svg" href="../res/img/help.svg">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/default.css') }}">
+    <link rel="icon" type="svg" href="{{ url_for('static', filename='img/login.svg') }}">
     <title>AI Tutor - Help</title>
 </head>
 <body class="help">
     <div class="further_info begin">
         <h1>Welcome to the AI Tutor</h1>
         <p>Here you will find some useful information about the project and the use of the AI Tutor. Please read carefully.<br/><br/>The AI Tutor is more than just a tool—it's your partner in mastering self-regulation, achieving better outcomes, and becoming a more independent and capable learner.</p>
-        <a href="../../frontend/pages/main.html" class="button_like_link"> back </a>
+        <a href="chatscreen" class="button_like_link"> back </a>
     </div>
     <div class="chat help">
         <div id="menu_container">
@@ -156,10 +156,11 @@
                     </a>
                 </div>
             </div>
-            <a href="../../frontend/pages/main.html" class="button_like_link"> back </a>
+            <a href="chatscreen" class="button_like_link"> back </a>
         </div>
     </div>
-    <script type="module" src="../res/js/help.js"></script>
-    <script type="text/javascript" src="../res/js/generalEvents.js"></script>
+
+    <script type="module" src="{{ url_for('static', filename='js/help.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/generalEvents.js') }}"></script>
 </body>
 </html>

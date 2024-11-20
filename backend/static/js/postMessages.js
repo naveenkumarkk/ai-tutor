@@ -5,11 +5,6 @@ const loadDataFromBackend = new LoadData();
 const generalFunctions = new GeneralFunctions();
 
 window.onload = async function() {
-
-    //TODO: make sure only those who are logged in can access the tutor
-    // all of the other should be redirected to the login page
-
-    // Setting active element
     let activeElement = document.getElementsByClassName("on");
     let activeSelection = localStorage.getItem('activeElement');
     setActiveElement(activeElement, activeSelection);

@@ -8,3 +8,4 @@
 /backend/auth/__pycache__
 /backend/__pycache__
 /backend/migrations/versions
+client_secret.json

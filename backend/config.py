@@ -1,11 +1,14 @@
 import os
 
 class Config:
-    SECRET_KEY = os.getenv('SECRET_KEY', 'your_secret_key')
-
     # MySQL database configuration
     SQLALCHEMY_DATABASE_URI = 'mysql://root:12345@localhost/study-beam'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    AUTH_REDIRECT_URL = "http://localhost:5000/google/auth_callback"
+    AUTHORIZATION_URL = "https://accounts.google.com/o/oauth2/v2/auth"
+    TOKEN_URL = "https://oauth2.googleapis.com/token"
+    USERINFO_URL = "https://openidconnect.googleapis.com/v1/userinfo"
 
     # Google OAuth configuration
     GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')

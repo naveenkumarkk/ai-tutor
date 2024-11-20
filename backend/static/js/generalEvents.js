@@ -1,5 +1,5 @@
 function openHelpPage() {
-  window.location.href = "../../../frontend/pages/help.html";
+  window.location.href = "/chatgpt/help";
 }
 
 function openMenuPopup() {
@@ -29,7 +29,7 @@ function openMenuPopup() {
 function handleLogout(event) {
   event.preventDefault();
   localStorage.removeItem("activeElement");
-  window.location.href = "../../../frontend/pages/login.html";
+  window.location.href = "/google/logout";
 }
 
 document.getElementById("help")?.addEventListener("click", openHelpPage);

@@ -14,11 +14,12 @@ function handleLogin (event) {
     localStorage.setItem("activeElement", "planning");
 
     //TODO validating
-    window.location.href = "../../../frontend/pages/main.html";
+    window.location.href = "/chatgpt/chatscreen";
 }
 
 window.onload = async function () {
     generalFunctions.toggleDarkmode();
+    generalFunctions.googleAuthentication();
 }
 
-document.getElementById("login").addEventListener("submit", handleLogin);
+// document.getElementById("login").addEventListener("submit", handleLogin);

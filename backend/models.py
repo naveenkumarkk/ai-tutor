@@ -1,31 +1,29 @@
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
+from extensions import db
 
-# Initialize SQLAlchemy
-db = SQLAlchemy()
-
-# User model to store user information
 class User(db.Model):
     __tablename__ = 'users'
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    first_name=db.Column(db.String(240),nullable=False)
-    last_name=db.Column(db.String(240),nullable=False)
-    dob=db.Column(db.Date,nullable=False)
+    first_name = db.Column(db.String(240), nullable=False)  # Maps to "given_name"
+    last_name = db.Column(db.String(240), nullable=False)   # Maps to "family_name"
+    email = db.Column(db.String(120), unique=True, nullable=False)  # Maps to "email"
+    google_id = db.Column(db.String(255), unique=True, nullable=True)  # Maps to "id" from Google info
+    profile_picture = db.Column(db.String(255), nullable=True)  # Maps to "picture"
+    verified_email = db.Column(db.Boolean, nullable=True)  # Maps to "verified_email"
     sex = db.Column(db.Enum('male', 'female', 'not-preferred', name='sex'), default='not-preferred')
-    nationality=db.Column(db.String(120),nullable=False)
-    occupation=db.Column(db.String(120),nullable=True)
-    organisation=db.Column(db.String(120),nullable=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    nationality = db.Column(db.String(120), nullable=True)
+    occupation = db.Column(db.String(120), nullable=True)
+    organisation = db.Column(db.String(120), nullable=True)
     google_token = db.Column(db.Text, nullable=True)  # Google OAuth token
     microsoft_token = db.Column(db.Text, nullable=True)  # Microsoft OAuth token
-    last_login=db.Column(db.DateTime,nullable=True)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    last_login = db.Column(db.DateTime, nullable=True)  # For tracking user's last login
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)  # User creation timestamp
 
     # Relationship: One user can have many conversations
     conversations = db.relationship('Conversation', backref='user', lazy=True)
 
     def __repr__(self):
-        return f'<User {self.username}>'
+        return f'<User {self.first_name} {self.last_name}>'
 
 
 # Conversation model to track conversation sessions
@@ -35,7 +33,7 @@ class Conversation(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     started_at = db.Column(db.DateTime, default=datetime.utcnow)
     status = db.Column(db.Enum('ongoing', 'completed', 'paused', name='conversation_status'), default='ongoing')
-
+    conversation_type = db.Column(db.Enum('planning','monitoring','reflecting',name='conversation_type'),nullable = False)
     # Relationship: One conversation can have many messages
     messages = db.relationship('Message', backref='conversation', lazy=True)
 
@@ -56,38 +54,3 @@ class Message(db.Model):
     def __repr__(self):
         return f'<Message {self.message_id} in conversation {self.conversation_id}>'
 
-class Schedule(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    subject = db.Column(db.String(120), nullable=False)
-    start_time = db.Column(db.DateTime, nullable=False)
-    end_time = db.Column(db.DateTime, nullable=False)
-    status = db.Column(db.Enum('completed', 'pending', name='status_enum'), default='pending')
-    tasks = db.relationship('Task', backref='schedule', lazy=True)
-
-# Task
-class Task(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    schedule_id = db.Column(db.Integer, db.ForeignKey('schedule.id'), nullable=False)
-    title = db.Column(db.String(200), nullable=False)
-    due_date = db.Column(db.DateTime, nullable=False)
-    completed = db.Column(db.Boolean, default=False)
-
-class Grade(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    subject = db.Column(db.String(120), nullable=False)
-    score = db.Column(db.Float, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    
-class Feedback(db.Model):
-    __tablename__ = 'feedback'
-    feedback_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    message_id = db.Column(db.Integer, db.ForeignKey('messages.message_id'), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    rating = db.Column(db.Integer, nullable=True) 
-    comments = db.Column(db.Text, nullable=True) 
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-    def __repr__(self):
-        return f'<Feedback {self.feedback_id} for message {self.message_id}>'

@@ -33,7 +33,7 @@ class ClickEvents {
     
     clickTips(event) {
         localStorage.setItem("activeElement", "tips");
-        window.location.href = "../../../frontend/pages/tips.html";
+        window.location.href = "/chatgpt/tips";
     }
 }
 

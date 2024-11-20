@@ -3,11 +3,11 @@
 from models import db, User, Conversation, Message
 from datetime import datetime
 
-def get_or_create_conversation(user_id):
+def get_or_create_conversation(user_id,conversation_type):
     """Retrieve an ongoing conversation or create a new one."""
     conversation = Conversation.query.filter_by(user_id=user_id, status='ongoing').first()
     if not conversation:
-        conversation = Conversation(user_id=user_id)
+        conversation = Conversation(user_id=user_id,conversation_type = conversation_type)
         db.session.add(conversation)
         db.session.commit()
     return conversation

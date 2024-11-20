@@ -1,4 +1,5 @@
 import json
+from flask import session, redirect, url_for
 
 def credentials_to_dict(credentials):
     return {
@@ -15,3 +16,12 @@ def save_token(user, token, provider):
         user.google_token = json.dumps(token)
     elif provider == 'microsoft':
         user.microsoft_token = json.dumps(token)
+
+def login_required(func):
+    def wrapper(*args, **kwargs):
+        if not session.get("google_token"):
+            # Redirect to the login page if not logged in
+            return redirect(url_for("index"))
+        return func(*args, **kwargs)
+    wrapper.__name__ = func.__name__  # Preserve the original function's name
+    return wrapper

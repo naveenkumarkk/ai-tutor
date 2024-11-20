@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../res/css/default.css">
-    <link rel="icon" type="svg" href="../res/img/main.svg">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/default.css') }}">
+    <link rel="icon" type="svg" href="{{ url_for('static', filename='img/login.svg') }}">
     <title>AI Tutor - Tips</title>
 </head>
 <body>
@@ -101,7 +101,7 @@
             </div>
         </div>
     </div>
-    <script type="module" src="../res/js/tipsHandling.js"></script>
-    <script type="text/javascript" src="../res/js/generalEvents.js"></script>
+    <script type="module" src="{{ url_for('static', filename='js/tipsHandling.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/generalEvents.js') }}"></script>
 </body>
 </html>
