@@ -1,7 +1,8 @@
 import requests
+import os
 
-url = "https://tu-openai-api-management.azure-api.net/nail-projects/openai/deployments/gpt-4o-nail/chat/completions"
-querystring = {"api-version": "2024-08-01-preview"}
+url = os.getenv('ENDPOINT_URL')
+querystring = {"api-version": os.getenv('CHAT_GPT_API_VERSION')}
 
 def get_chatgpt_response(user_message, conversation_type):
     try:
@@ -40,7 +41,7 @@ def get_chatgpt_response(user_message, conversation_type):
         headers = {
             "Content-Type": "application/json",
             "User-Agent": "Insomnia/2023.5.6",
-            "api-key": "8c5567ebd69347cc8092ea4c55efeec9",
+            "api-key":  os.getenv('CHAT_GPT_API_KEY'),
         }
 
         # Make the POST request

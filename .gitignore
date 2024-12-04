@@ -5,7 +5,7 @@
 /migrations/__pycache__
 /migrations
 .env
-/backend/auth/__pycache__
-/backend/__pycache__
-/backend/migrations/versions
+/app/auth/__pycache__
+/app/__pycache__
+/app/migrations/versions
 client_secret.json
