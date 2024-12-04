@@ -11,7 +11,7 @@ google-auth-oauthlib==0.4.6    # OAuthlib for Google
 google-auth-httplib2==0.1.0    # HTTP client for Google APIs
 google-api-python-client==2.29.0 # Google API client
 
-openai==0.8.0                  # OpenAI API (for ChatGPT integration)
+openai==0.28                  # OpenAI API (for ChatGPT integration)
 
 msal==1.16.0                   # Microsoft Authentication Library (MSAL for Microsoft Auth)
 Flask-JWT-Extended==4.3.1      # JWT authentication for users
@@ -19,3 +19,4 @@ Flask-JWT-Extended==4.3.1      # JWT authentication for users
 
 Werkzeug>=2.2.0
 SQLAlchemy>=1.4.0
+mysqlclient==2.0.3

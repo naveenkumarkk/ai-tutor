@@ -28,7 +28,7 @@ SCOPES = [
 
 @google_bp.route("/login")
 def google_login():
-    flow = Flow.from_client_secrets_file("./backend/client_secret.json", scopes=SCOPES)
+    flow = Flow.from_client_secrets_file("../backend/client_secret.json", scopes=SCOPES)
     flow.redirect_uri = url_for("callback", _external=True)
     authorization_url, state = flow.authorization_url(
         access_type="offline", include_granted_scopes="true"
@@ -41,7 +41,7 @@ def google_login():
 def auth_callback():
     state = session.get("state")
     flow = Flow.from_client_secrets_file(
-        "./backend/client_secret.json", scopes=SCOPES, state=state
+        "../backend/client_secret.json", scopes=SCOPES, state=state
     )
     flow.redirect_uri = url_for("callback", _external=True)
     authorization_response = request.url

@@ -17,10 +17,9 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 migrate.init_app(app, db)
 
-# Register blueprints
 app.register_blueprint(google_bp, url_prefix="/google")
 app.register_blueprint(chatgpt_bp, url_prefix="/chatgpt")
-# Routes
+
 @app.route("/")
 @app.route("/login")
 def index():
@@ -32,7 +31,6 @@ def callback():
     redirect_uri = url_for("google_bp.auth_callback", _external=True, **params)
     return redirect(redirect_uri)
 
-# Main execution
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
