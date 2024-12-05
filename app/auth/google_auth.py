@@ -16,6 +16,7 @@ from utils import credentials_to_dict, save_token
 import google.oauth2.credentials
 import googleapiclient.discovery
 from datetime import datetime
+import json
 
 google_bp = Blueprint("google_bp", __name__)
 
@@ -68,7 +69,7 @@ def auth_callback():
         user.verified_email = user_info["verified_email"]
         user.last_login = datetime.utcnow()
     token = credentials_to_dict(credentials)
-    user.google_token = token
+    user.google_token = json.dumps(token)
     session["google_token"] = token
     session["user_id"] = user.user_id
     db.session.commit()

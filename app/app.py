@@ -11,7 +11,7 @@ app.config.from_object(Config)
 
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:12345@localhost/study-beam"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://admin:.rlXI0}1mq}gf+(Gp$DGA7<%#-.7@study-beam.cluster-cdmkm2suy14g.eu-north-1.rds.amazonaws.com/studybeam"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
