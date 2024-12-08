@@ -1,6 +1,6 @@
 import json
 from flask import session, redirect, url_for
-
+import logging
 def credentials_to_dict(credentials):
     return {
         'token': credentials.token,
@@ -19,6 +19,7 @@ def save_token(user, token, provider):
 
 def login_required(func):
     def wrapper(*args, **kwargs):
+        logging.debug(f"Login Wrapper: {session}")
         if not session.get("google_token"):
             # Redirect to the login page if not logged in
             return redirect(url_for("index"))

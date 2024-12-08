@@ -17,6 +17,9 @@ import google.oauth2.credentials
 import googleapiclient.discovery
 from datetime import datetime
 import json
+import logging
+from flask import session
+
 
 google_bp = Blueprint("google_bp", __name__)
 
@@ -40,41 +43,74 @@ def google_login():
 
 @google_bp.route("/callback")
 def auth_callback():
-    state = session.get("state")
-    flow = Flow.from_client_secrets_file(
-        "../app/client_secret.json", scopes=SCOPES, state=state
-    )
-    flow.redirect_uri = url_for("callback", _external=True)
-    authorization_response = request.url
-    flow.fetch_token(authorization_response=authorization_response)
-    credentials = flow.credentials
-    user_info = get_google_user_info(credentials)
-
-    user = User.query.filter_by(email=user_info["email"]).first()
-    if not user:
-        user = User(
-            first_name=user_info["given_name"],
-            last_name=user_info["family_name"],
-            email=user_info["email"],
-            google_id=user_info["id"],
-            profile_picture=user_info["picture"],
-            verified_email=user_info["verified_email"],
-            created_at=datetime.utcnow(),
+    try:
+        # Retrieve the state from the session
+        state = session.get("state")
+        if not state:
+            raise ValueError("Session state missing or invalid.")
+        logging.debug(f"State from session: {state}")
+        
+        # Initialize the OAuth flow
+        flow = Flow.from_client_secrets_file(
+            "../app/client_secret.json", scopes=SCOPES, state=state
         )
-        db.session.add(user)
-    else:
-        user.first_name = user_info["given_name"]
-        user.last_name = user_info["family_name"]
-        user.profile_picture = user_info["picture"]
-        user.verified_email = user_info["verified_email"]
-        user.last_login = datetime.utcnow()
-    token = credentials_to_dict(credentials)
-    user.google_token = json.dumps(token)
-    session["google_token"] = token
-    session["user_id"] = user.user_id
-    db.session.commit()
+        flow.redirect_uri = url_for("callback", _external=True)
+        
+        # Fetch the token using the authorization response
+        authorization_response = request.url
+        logging.debug(f"Authorization response: {authorization_response}")
+        
+        flow.fetch_token(authorization_response=authorization_response)
+        credentials = flow.credentials
+        logging.debug(f"Fetched credentials: {credentials}")
+        
+        # Get user information from the Google API
+        user_info = get_google_user_info(credentials)
+        logging.debug(f"User info retrieved: {user_info}")
 
-    return redirect(url_for("chatgpt_bp.chatscreen", _external=True))
+        # Check if the user exists in the database or create a new user
+        user = User.query.filter_by(email=user_info["email"]).first()
+        if not user:
+            user = User(
+                first_name=user_info["given_name"],
+                last_name=user_info["family_name"],
+                email=user_info["email"],
+                google_id=user_info["id"],
+                profile_picture=user_info["picture"],
+                verified_email=user_info["verified_email"],
+                created_at=datetime.utcnow(),
+            )
+            db.session.add(user)
+            db.session.flush() 
+        else:
+            # Update user details if they already exist
+            user.first_name = user_info["given_name"]
+            user.last_name = user_info["family_name"]
+            user.profile_picture = user_info["picture"]
+            user.verified_email = user_info["verified_email"]
+            user.last_login = datetime.utcnow()
+        
+        # Save the token to the session
+        token = credentials_to_dict(credentials)
+        user.google_token = json.dumps(token)
+        session["google_token"] = token
+        session["user_id"] = user.user_id
+        logging.debug(f"Session Info {session}")
+        
+        # Commit changes to the database
+        try:
+            db.session.commit()
+        except Exception as e:
+            logging.error(f"Database commit error: {str(e)}", exc_info=True)
+            raise e
+        
+        # Redirect to the chat screen
+        return redirect(url_for("chatgpt_bp.chatscreen", _external=True))
+
+    except Exception as e:
+        # Log any exceptions and return an error response
+        logging.error(f"Error in auth_callback: {str(e)}", exc_info=True)
+        return jsonify({"error": "Authentication failed", "details": str(e)}), 500
 
 
 @google_bp.route("/logout")
