@@ -105,7 +105,7 @@ def auth_callback():
             raise e
         
         # Redirect to the chat screen
-        return redirect(url_for("chatgpt_bp.chatscreen", _external=True))
+        return redirect(url_for("chatgpt_bp.welcomescreen", _external=True))
 
     except Exception as e:
         # Log any exceptions and return an error response

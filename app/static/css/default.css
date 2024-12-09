@@ -184,6 +184,7 @@ div.icon {
 /* icon help */
 div.icon.help {
   background-color: var(--icon-help-background-color);
+
   & svg {
     fill: var(--icon-help-color);
   }
@@ -261,16 +262,16 @@ div.icon.logo {
 div.icon.toggle {
   background-color: var(--button-icon-send-background-color-hover);
   margin: 0px;
-  -webkit-box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
-  box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
 
   & svg {
-      fill: var(--button-icon-toggle-color);
+    fill: var(--button-icon-toggle-color);
   }
 }
 
-div.icon.toggle:hover svg{
+div.icon.toggle:hover svg {
   fill: var(--button-icon-send-color);
 }
 
@@ -300,34 +301,36 @@ div.sidebar {
   height: 100%;
 
   & #toggleSidebar {
-      all: unset;
-      align-self: flex-end;
+    all: unset;
+    align-self: flex-end;
   }
 
-  & .button_collection{
-      margin-top: 30%;
+  & .button_collection {
+    margin-top: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    & button {
       display: flex;
-      flex-direction: column;
-      gap: 20px;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-color);
+      -webkit-box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
+      box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
+      gap: 10px;
+    }
 
-      & button {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          color: var(--text-color);
-          -webkit-box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
-          -moz-box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
-          box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
-          gap: 10px;
-      }
-
-      & button:hover, button.on {
-          color: var(--secondary-text-color);
-      }
+    & button:hover,
+    button.on {
+      color: var(--secondary-text-color);
+    }
   }
+
   & .icon.help {
-      align-self: center;
-      margin-bottom: 20%;
+    align-self: center;
+    margin-bottom: 20%;
   }
 }
 
@@ -335,19 +338,19 @@ div.sidebar.folded {
   background-color: rgba(0, 0, 0, 0);
 
   & #toggleSidebar svg {
-      transform: rotate(180deg);
+    transform: rotate(180deg);
   }
 
-  & .button_collection{
-      display: none;
+  & .button_collection {
+    display: none;
   }
 
   & #help {
-      display: none;
+    display: none;
   }
 }
 
-div.sidebar:not(.folded){
+div.sidebar:not(.folded) {
   width: fit-content;
   z-index: 10;
 }
@@ -432,13 +435,13 @@ div.chat.expanded {
   transition: width 0.1s ease;
 
   & .prompt.inputfield {
-      margin-left: 0%;
-      left: 50%;
-      transform: translateX(-50%);
+    margin-left: 0%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   & #prompt {
-      width: 100%;
+    width: 100%;
   }
 }
 
@@ -532,9 +535,9 @@ body.help {
   }
 
   & .contact {
-    -webkit-box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
-    box-shadow: 0px 10px 17px -7px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
     gap: 10px;
     align-items: center;
     display: flex;
@@ -574,6 +577,7 @@ body.help {
     }
   }
 }
+
 #menu_container:not(.open) {
   & .overlay {
     display: none;
@@ -604,6 +608,7 @@ label#darkmode-toggle {
     inset 0px -5px 15px rgba(255, 255, 255, 0.4);
   cursor: pointer;
   transition: 0.3s;
+
   &:after {
     content: "";
     width: 32.5px;
@@ -616,16 +621,19 @@ label#darkmode-toggle {
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     transition: 0.3s;
   }
+
   svg {
     position: absolute;
     width: 32.5px;
     top: 2.5px;
     z-index: 100;
+
     &.sun {
       left: 5px;
       fill: #fff;
       transition: 0.3s;
     }
+
     &.moon {
       left: 83px;
       fill: #7e7e7e;
@@ -634,26 +642,88 @@ label#darkmode-toggle {
   }
 }
 
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.welcome-container {
+  text-align: center;
+  max-width: 600px;
+  background: white;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.welcome-section h1 {
+  font-size: 2rem;
+  color: #343a40;
+}
+
+.welcome-section p {
+  font-size: 1rem;
+  color: #495057;
+  margin: 20px 0;
+}
+
+.welcome-start-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.welcome-tutorial-button {
+  background-color: white;
+  color: #28a745;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.welcome-start-button:hover {
+  background-color: #218838;
+}
+
 input#darkmode-toggle {
   width: 0;
   height: 0;
   display: none;
-  &:checked + label {
+
+  &:checked+label {
     background: #242424;
+
     &:after {
       left: 115px;
       transform: translateX(-100%);
       background: linear-gradient(180deg, #777, #3a3a3a);
     }
+
     svg {
       &.sun {
         fill: #7e7e7e;
       }
+
       &.moon {
         fill: #fff;
       }
     }
   }
+
   &:active:after {
     width: 120px;
   }
@@ -669,11 +739,12 @@ input#darkmode-toggle {
     width: 70%;
     height: 70%;
   }
+
   #sidebar-toggle {
     display: flex;
   }
 
-  .overlay .button_like_link{
+  .overlay .button_like_link {
     width: 80px !important;
   }
 
@@ -681,6 +752,7 @@ input#darkmode-toggle {
     width: 80px;
     height: 32.5px;
     border-radius: 32.5px;
+
     &:after {
       width: 22.5px;
       height: 22.5px;
@@ -688,24 +760,28 @@ input#darkmode-toggle {
       left: 4px;
       border-radius: 22.5px;
     }
+
     svg {
       width: 22.5px;
       top: 5px;
+
       &.sun {
         left: 4px;
       }
+
       &.moon {
         left: 53px;
       }
     }
   }
-  
+
   input#darkmode-toggle {
-    &:checked + label {
+    &:checked+label {
       &:after {
         left: 75px;
       }
     }
+
     &:active:after {
       width: 80px;
     }
@@ -721,7 +797,8 @@ input#darkmode-toggle {
     width: 100%;
   }
 
-  .button_collection button, .button_like_link {
+  .button_collection button,
+  .button_like_link {
     font-size: 12px;
   }
 
@@ -738,24 +815,24 @@ input#darkmode-toggle {
     top: 10px;
   }
 
-  .login.container{
+  .login.container {
     border-radius: 0px;
     width: 100%;
     overflow: hidden;
     transition-duration: 300ms;
 
     & input {
-        width: 75%;
-        transition-duration: 300ms;
+      width: 75%;
+      transition-duration: 300ms;
     }
 
     & button {
-        width: 50%;
+      width: 50%;
     }
   }
 
   .filler {
-      flex: 0;
+    flex: 0;
   }
 
 }
@@ -767,7 +844,8 @@ input#darkmode-toggle {
     font-size: 18px;
   }
 
-  .button_collection button, .button_like_link {
+  .button_collection button,
+  .button_like_link {
     font-size: 17px;
   }
 
@@ -777,22 +855,25 @@ input#darkmode-toggle {
 
   label#darkmode-toggle {
     width: 100px;
+
     &:after {
       left: 5px;
     }
+
     svg {
       &.moon {
         left: 63px;
       }
     }
   }
-  
+
   input#darkmode-toggle {
-    &:checked + label {
+    &:checked+label {
       &:after {
         left: 95px;
       }
     }
+
     &:active:after {
       width: 100px;
     }
@@ -811,37 +892,37 @@ input#darkmode-toggle {
   }
 }
 
-@media(max-height: 565px){
+@media(max-height: 565px) {
   .login.container {
-      height: 100%;
-      padding: 10px;
-      border-radius: 0px;
-      transition-duration: 300ms;
+    height: 100%;
+    padding: 10px;
+    border-radius: 0px;
+    transition-duration: 300ms;
 
-      & button {
-          margin: 0px;
-      }
+    & button {
+      margin: 0px;
+    }
   }
 }
 
-@media(min-height: 566px){
-  .login.container{
-      transition-duration: 300ms;
+@media(min-height: 566px) {
+  .login.container {
+    transition-duration: 300ms;
   }
 }
 
-@media(max-width: 650px){
+@media(max-width: 650px) {
   body.help {
-      & h1 {
-          max-width: 70%;
-      }
+    & h1 {
+      max-width: 70%;
+    }
 
-      & .further_info.begin button {
-          margin-bottom: -20px;
-      }
+    & .further_info.begin button {
+      margin-bottom: -20px;
+    }
 
-      & .further_info.end {
-          margin-top: -10%;
-      }
+    & .further_info.end {
+      margin-top: -10%;
+    }
   }
 }

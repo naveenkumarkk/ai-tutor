@@ -83,3 +83,8 @@ def tipsscreen():
 @login_required
 def helpscreen():
     return render_template("help.html")
+
+@chatgpt_bp.route("/welcome")
+@login_required
+def welcomescreen():
+    return render_template("welcome.html")
