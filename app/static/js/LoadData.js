@@ -46,6 +46,7 @@ class LoadData {
     }
 
     addAnswer(message) {
+        var md = window.markdownit();
         const answerContainer = document.createElement("div");
         answerContainer.className = "answer_container";
         answerContainer.innerHTML = `
@@ -54,24 +55,22 @@ class LoadData {
                     <path d="M280-280h160v-160H280v160Zm240 0h160v-160H520v160ZM280-520h160v-160H280v160Zm240 0h160v-160H520v160ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/>
                 </svg>
             </div>
-            <p class="answer">${message}</p>
         `;
+        const text = document.createElement("DIV");
+        text.className = "answer";
+        var html = md.render(message);
+        text.innerHTML = html.replace(/(\d+\.)/g, "<br>$1")
+                            .replace(/(<br>\d+\.\s*<strong>.*?<\/strong>:)/g, '<br>$1<br>')
+                            .replace(/ - (.*?)(?=<br>|\n|$| -)/g, (match, p1) => {
+                                return `<ul><li>${p1.trim()}</li></ul>`;
+                            })
+        answerContainer.appendChild(text);
         return answerContainer;
+        
     }
 
-    scrollToBottom(timedelay = 0) {
-        var scrollId;
-        var height = 0;
-        var minScrollHeight = 100;
-        scrollId = setInterval(function () {
-            if (height <= document.body.scrollHeight) {
-                window.scrollBy(0, minScrollHeight);
-            }
-            else {
-                clearInterval(scrollId);
-            }
-            height += minScrollHeight;
-        }, timedelay);
+    scrollToBottom() {
+        window.scrollTo(0, document.body.scrollHeight);
     }
 
     async getHistory() {
