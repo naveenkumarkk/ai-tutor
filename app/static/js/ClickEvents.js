@@ -1,36 +1,61 @@
+import LoadData from "./LoadData.js";
+const loadDataFromBackend = new LoadData();
 class ClickEvents {
 
     clickPlanning() {
-        let currentElement = document.getElementsByClassName("on");
-        if (currentElement.length == 1 && currentElement[0].id != "planning"){
-            currentElement[0].classList.toggle("on");
+        if (localStorage.getItem('allowPlanningPhase') == 'true') {
+            if (localStorage.getItem('activeElement') !== 'planning') {
+                document.getElementById("promptInput").classList.remove("hidden");
+            }
+            document.getElementById("promptInput").classList.remove("hidden");
+            form.removec
+            let currentElement = document.getElementsByClassName("on");
+            if (currentElement.length == 1 && currentElement[0].id != "planning") {
+                currentElement[0].classList.toggle("on");
+            }
+            document.getElementById("planning").classList.toggle("on");
+            localStorage.setItem("activeElement", "planning");
+            // loadDataFromBackend.updateNextPhaseStatus()
+        } else {
+            alert("You have an ongoing conversation! Complete that and comeback to planning phase for new conversation")
         }
-        document.getElementById("planning").classList.toggle("on");
-        localStorage.setItem("activeElement", "planning");
-    
-        //TODO update history & change view
+
     }
-    
+
     clickMonitoring() {
-        let currentElement = document.getElementsByClassName("on");
-        if (currentElement.length == 1 && currentElement[0].id != "monitoring"){
-            currentElement[0].classList.toggle("on");
+        if (localStorage.getItem('allowMonitoringPhase') == 'true') {
+            if (localStorage.getItem('activeElement') !== 'monitoring') {
+                document.getElementById("promptInput").classList.remove("hidden");
+            }
+            let currentElement = document.getElementsByClassName("on");
+            if (currentElement.length == 1 && currentElement[0].id != "monitoring") {
+                currentElement[0].classList.toggle("on");
+            }
+            document.getElementById("monitoring").classList.toggle("on");
+            localStorage.setItem("activeElement", "monitoring");
+            // loadDataFromBackend.updateNextPhaseStatus()
+        } else {
+            alert("Complete the planning phase!")
         }
-        document.getElementById("monitoring").classList.toggle("on");
-        localStorage.setItem("activeElement", "monitoring");
-        //TODO update history & change view
     }
-    
+
     clickReflecting() {
-        let currentElement = document.getElementsByClassName("on");
-        if (currentElement.length == 1 && currentElement[0].id != "reflecting"){
-            currentElement[0].classList.toggle("on");
+        if (localStorage.getItem('allowReflectionPhase') == 'true') {
+            if (localStorage.getItem('activeElement') !== 'reflecting') {
+                document.getElementById("promptInput").classList.remove("hidden");
+            }
+            let currentElement = document.getElementsByClassName("on");
+            if (currentElement.length == 1 && currentElement[0].id != "reflecting") {
+                currentElement[0].classList.toggle("on");
+            }
+            document.getElementById("reflecting").classList.toggle("on");
+            localStorage.setItem("activeElement", "reflecting");
+            // loadDataFromBackend.updateNextPhaseStatus()
+        } else {
+            alert("Complete the Monitoring phase!")
         }
-        document.getElementById("reflecting").classList.toggle("on");
-        localStorage.setItem("activeElement", "reflecting");
-        //TODO update history & change view
     }
-    
+
     clickTips(event) {
         localStorage.setItem("activeElement", "tips");
         window.location.href = "/chatgpt/tips";

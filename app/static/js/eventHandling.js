@@ -57,8 +57,14 @@ function submitForm(event) {
   const form = document.getElementById("promptInput");
   const prompt = new FormData(form).get("prompt");
 
-  // TODO: Save data in DB & get response from AI for answer
+  const keywords = ["completed", "finished", "done"];
+  const isPhaseCompleted = keywords.some(keyword => prompt.toLowerCase().includes(keyword));
+
   promptHandling.handlePrompt(prompt);
+
+  if (isPhaseCompleted) {
+    form.classList.add("hidden");
+  }
 
   form.reset();
 }

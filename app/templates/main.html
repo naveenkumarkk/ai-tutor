@@ -18,7 +18,7 @@
             </div>
         </button>
         <div class="button_collection">
-          <button id="planning">
+          <button id="planning" disabled>
             Planning
             <div class="button icon">
               <svg
@@ -32,7 +32,7 @@
               </svg>
             </div>
           </button>
-          <button id="monitoring">
+          <button id="monitoring" disabled>
             Monitoring
             <div class="button icon">
               <svg
@@ -46,7 +46,7 @@
               </svg>
             </div>
           </button>
-          <button id="reflecting">
+          <button id="reflecting" disabled>
             Reflecting
             <div class="button icon">
               <svg
@@ -171,7 +171,6 @@
     </div>
     <script type="module" src="{{ url_for('static', filename='js/postMessages.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/eventHandling.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/LoadData.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/generalEvents.js') }}"></script>
   </body>
 </html>

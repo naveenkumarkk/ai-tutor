@@ -31,7 +31,10 @@ class LoadData {
 
     addPromptAnswer(prompt, answer) {
         const parent = document.getElementsByClassName("messages")[0];
-        parent.appendChild(this.addPrompt(prompt));
+        if (prompt && prompt.trim() !== "") {
+            parent.appendChild(this.addPrompt(prompt));
+        }
+        
         parent.appendChild(this.addAnswer(answer));
     }
 
@@ -80,7 +83,7 @@ class LoadData {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({conversation_type: localStorage.getItem("activeElement") }),
+                body: JSON.stringify({ conversation_type: localStorage.getItem("activeElement") }),
             });
 
             const data = await response.json();
@@ -88,7 +91,11 @@ class LoadData {
             if (data?.reply) {
                 for (let i = 0; i < data.reply.length; i++) {
                     this.addPromptAnswer(data.reply[i].prompt, data.reply[i].reply);
-                }                
+                }
+                localStorage.setItem('allowPlanningPhase', data?.allow_planning_phase)
+                localStorage.setItem('allowMonitoringPhase', data?.allow_monitoring_phase)
+                localStorage.setItem('allowReflectionPhase', data?.allow_reflection_phase)
+                this.updatePhaseButtonState()
             } else {
                 alert(data.error || "Error processing your message.");
             }
@@ -99,6 +106,93 @@ class LoadData {
         document.getElementById("prompt").value = "";
         this.scrollToBottom();
     }
+
+    async updateNextPhaseStatus() {
+        try {
+            let currentActiveElement = localStorage.getItem("activeElement");
+            const response = await fetch("/chatgpt/allow-next-phase", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ conversation_type: currentActiveElement }),
+            });
+            const data = await response.json();
+            switch (currentActiveElement) {
+                case 'planning':
+                    localStorage.setItem("allowMonitoringPhase", data?.response);
+                    localStorage.setItem("allowReflectionPhase", false);
+                    localStorage.setItem("allowPlanningPhase", !data?.response);
+                    break;
+                case 'monitoring':
+                    localStorage.setItem("allowMonitoringPhase", !data?.response);
+                    localStorage.setItem("allowReflectionPhase", data?.response);
+                    localStorage.setItem("allowPlanningPhase", false);
+                    break;
+                case 'reflecting':
+                    localStorage.setItem("allowMonitoringPhase", false);
+                    localStorage.setItem("allowReflectionPhase", !data?.response);
+                    localStorage.setItem("allowPlanningPhase", data?.response);
+                    break;
+            }
+            this.updatePhaseButtonState()
+        } catch (error) {
+            console.log(error);
+            alert("An error occurred while communicating with the server.");
+        }
+    }
+
+    updatePhaseButtonState() {
+        let monitoringButton = document.getElementById('monitoring');
+        let reflectionButton = document.getElementById('reflecting');
+        let planningButton = document.getElementById('planning');
+        if (monitoringButton) {
+            monitoringButton.disabled = localStorage.getItem("allowMonitoringPhase")
+                ? localStorage.getItem("allowMonitoringPhase") !== "true"
+                : false;
+
+            if (monitoringButton.disabled) {
+                monitoringButton.classList.add("off");
+            } else {
+                monitoringButton.classList.remove("off");
+            }
+        } else {
+            console.error("monitoringButton not found in the DOM");
+        }
+
+        if (reflectionButton) {
+            reflectionButton.disabled = localStorage.getItem("allowReflectionPhase")
+                ? localStorage.getItem("allowReflectionPhase") !== "true"
+                : false;
+
+
+            if (reflectionButton.disabled) {
+                reflectionButton.classList.add("off");
+            } else {
+                reflectionButton.classList.remove("off");
+            }
+        } else {
+            console.error("reflectionButton not found in the DOM");
+        }
+
+
+        if (planningButton) {
+            planningButton.disabled = localStorage.getItem("allowPlanningPhase")
+                ? localStorage.getItem("allowPlanningPhase") !== "true"
+                : false;
+
+
+            if (planningButton.disabled) {
+                planningButton.classList.add("off");
+            } else {
+                planningButton.classList.remove("off");
+            }
+        } else {
+            console.error("planningButton not found in the DOM");
+        }
+    }
+
 }
+
 
 export default LoadData;

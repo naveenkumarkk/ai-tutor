@@ -14,9 +14,14 @@ class PromptHandling {
       });
 
       const data = await response.json();
-
+      
       if (data?.reply) {
         loadData.addPromptAnswer(prompt,data?.reply)
+        localStorage.setItem('allowPlanningPhase',data?.allow_planning_phase)
+        localStorage.setItem('allowMonitoringPhase',data?.allow_monitoring_phase)
+        localStorage.setItem('allowReflectionPhase',data?.allow_reflection_phase)
+        loadData.updatePhaseButtonState()
+
       } else {
         alert(data.error || "Error processing your message.");
       }

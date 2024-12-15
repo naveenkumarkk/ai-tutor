@@ -29,7 +29,7 @@
                         </svg>
                     </div>
                 </button>
-                <button id="monitoring">Monitoring
+                <button id="monitoring" disabled>Monitoring
                     <div class="button icon">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                             fill="#000000">
@@ -37,7 +37,7 @@
                         </svg>
                     </div>
                 </button>
-                <button id="reflecting">Reflecting
+                <button id="reflecting" disabled>Reflecting
                     <div class="button icon">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                             fill="#000000">
@@ -220,6 +220,7 @@
             </div>
         </div>
     </div>
+    <script type="module" src="{{ url_for('static', filename='js/postMessages.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/tipsHandling.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/generalEvents.js') }}"></script>
 </body>
