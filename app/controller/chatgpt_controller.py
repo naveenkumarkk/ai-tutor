@@ -34,7 +34,7 @@ def user_chat_history():
     for message in messages:
         if message.role == "user":
             current_prompt = message.content
-        elif message.role == "assistant" and current_prompt:
+        elif message.role == "assistant":
             pairs.append({
                 "prompt": current_prompt,
                 "reply": message.content
@@ -125,10 +125,20 @@ def check_next_phase_status():
     data = request.json
     conversation_type = data.get('conversation_type')
     user_message = ""
-    allow_planning_phase, allow_monitoring_phase, allow_reflection_phase = get_phase_permissions(user_message, conversation_type)
+
+    allow_planning_phase, allow_monitoring_phase, allow_reflection_phase = get_phase_permissions(
+        user_message, conversation_type
+    )
+
+    if conversation_type == 'tips':
+        if allow_planning_phase and   and allow_reflection_phase:
+            allow_planning_phase = True
+            allow_monitoring_phase = False
+            allow_reflection_phase = False
+
     return jsonify({
         'allow_reflection_phase': allow_reflection_phase,
-        'allow_monitoring_phase':allow_monitoring_phase,
+        'allow_monitoring_phase': allow_monitoring_phase,
         'allow_planning_phase': allow_planning_phase
     })
 

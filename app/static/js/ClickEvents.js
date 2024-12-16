@@ -7,8 +7,7 @@ class ClickEvents {
             if (localStorage.getItem('activeElement') !== 'planning' && localStorage.getItem('activeElement') !== '' && localStorage.getItem('activeElement') !== 'tips') {
                 document.getElementById("promptInput").classList.remove("hidden");
             }
-            document.getElementById("promptInput").classList.remove("hidden");
-            form.removec
+            
             let currentElement = document.getElementsByClassName("on");
             if (currentElement.length == 1 && currentElement[0].id != "planning") {
                 currentElement[0].classList.toggle("on");
