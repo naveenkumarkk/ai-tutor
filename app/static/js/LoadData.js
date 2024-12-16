@@ -17,6 +17,7 @@ class LoadData {
             this.getHistory()
 
         } else if (activeElement == "tips") {
+            this.updateNextPhaseStatus()
             window.location.href = "/chatgpt/tips";
             return;
         } else {
@@ -34,7 +35,7 @@ class LoadData {
         if (prompt && prompt.trim() !== "") {
             parent.appendChild(this.addPrompt(prompt));
         }
-        
+
         parent.appendChild(this.addAnswer(answer));
     }
 
@@ -60,13 +61,13 @@ class LoadData {
         text.className = "answer";
         var html = md.render(message);
         text.innerHTML = html.replace(/(\d+\.)/g, "<br>$1")
-                            .replace(/(<br>\d+\.\s*<strong>.*?<\/strong>:)/g, '<br>$1<br>')
-                            .replace(/ - (.*?)(?=<br>|\n|$| -)/g, (match, p1) => {
-                                return `<ul><li>${p1.trim()}</li></ul>`;
-                            })
+            .replace(/(<br>\d+\.\s*<strong>.*?<\/strong>:)/g, '<br>$1<br>')
+            .replace(/ - (.*?)(?=<br>|\n|$| -)/g, (match, p1) => {
+                return `<ul><li>${p1.trim()}</li></ul>`;
+            })
         answerContainer.appendChild(text);
         return answerContainer;
-        
+
     }
 
     scrollToBottom() {
@@ -117,79 +118,66 @@ class LoadData {
                 body: JSON.stringify({ conversation_type: currentActiveElement }),
             });
             const data = await response.json();
-            switch (currentActiveElement) {
-                case 'planning':
-                    localStorage.setItem("allowMonitoringPhase", data?.response);
-                    localStorage.setItem("allowReflectionPhase", false);
-                    localStorage.setItem("allowPlanningPhase", !data?.response);
-                    break;
-                case 'monitoring':
-                    localStorage.setItem("allowMonitoringPhase", !data?.response);
-                    localStorage.setItem("allowReflectionPhase", data?.response);
-                    localStorage.setItem("allowPlanningPhase", false);
-                    break;
-                case 'reflecting':
-                    localStorage.setItem("allowMonitoringPhase", false);
-                    localStorage.setItem("allowReflectionPhase", !data?.response);
-                    localStorage.setItem("allowPlanningPhase", data?.response);
-                    break;
-            }
+            localStorage.setItem('allowPlanningPhase', data?.allow_planning_phase)
+            localStorage.setItem('allowMonitoringPhase', data?.allow_monitoring_phase)
+            localStorage.setItem('allowReflectionPhase', data?.allow_reflection_phase)
+
             this.updatePhaseButtonState()
-        } catch (error) {
-            console.log(error);
-            alert("An error occurred while communicating with the server.");
+    } catch(error) {
+        console.log(error);
+        alert("An error occurred while communicating with the server.");
+    }
+}
+
+updatePhaseButtonState() {
+    let monitoringButton = document.getElementById('monitoring');
+    let reflectionButton = document.getElementById('reflecting');
+    let planningButton = document.getElementById('planning');
+    if (monitoringButton) {
+        monitoringButton.disabled = localStorage.getItem("allowMonitoringPhase")
+            ? localStorage.getItem("allowMonitoringPhase") !== "true"
+            : false;
+
+        if (monitoringButton.disabled) {
+            monitoringButton.classList.add("off");
+        } else {
+            monitoringButton.classList.remove("off");
         }
+    } else {
+        console.error("monitoringButton not found in the DOM");
     }
 
-    updatePhaseButtonState() {
-        let monitoringButton = document.getElementById('monitoring');
-        let reflectionButton = document.getElementById('reflecting');
-        let planningButton = document.getElementById('planning');
-        if (monitoringButton) {
-            monitoringButton.disabled = localStorage.getItem("allowMonitoringPhase")
-                ? localStorage.getItem("allowMonitoringPhase") !== "true"
-                : false;
+    if (reflectionButton) {
+        reflectionButton.disabled = localStorage.getItem("allowReflectionPhase")
+            ? localStorage.getItem("allowReflectionPhase") !== "true"
+            : false;
 
-            if (monitoringButton.disabled) {
-                monitoringButton.classList.add("off");
-            } else {
-                monitoringButton.classList.remove("off");
-            }
+
+        if (reflectionButton.disabled) {
+            reflectionButton.classList.add("off");
         } else {
-            console.error("monitoringButton not found in the DOM");
+            reflectionButton.classList.remove("off");
         }
-
-        if (reflectionButton) {
-            reflectionButton.disabled = localStorage.getItem("allowReflectionPhase")
-                ? localStorage.getItem("allowReflectionPhase") !== "true"
-                : false;
-
-
-            if (reflectionButton.disabled) {
-                reflectionButton.classList.add("off");
-            } else {
-                reflectionButton.classList.remove("off");
-            }
-        } else {
-            console.error("reflectionButton not found in the DOM");
-        }
-
-
-        if (planningButton) {
-            planningButton.disabled = localStorage.getItem("allowPlanningPhase")
-                ? localStorage.getItem("allowPlanningPhase") !== "true"
-                : false;
-
-
-            if (planningButton.disabled) {
-                planningButton.classList.add("off");
-            } else {
-                planningButton.classList.remove("off");
-            }
-        } else {
-            console.error("planningButton not found in the DOM");
-        }
+    } else {
+        console.error("reflectionButton not found in the DOM");
     }
+
+
+    if (planningButton) {
+        planningButton.disabled = localStorage.getItem("allowPlanningPhase")
+            ? localStorage.getItem("allowPlanningPhase") !== "true"
+            : false;
+
+
+        if (planningButton.disabled) {
+            planningButton.classList.add("off");
+        } else {
+            planningButton.classList.remove("off");
+        }
+    } else {
+        console.error("planningButton not found in the DOM");
+    }
+}
 
 }
 

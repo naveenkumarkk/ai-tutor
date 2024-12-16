@@ -1,7 +1,9 @@
 import ClickEvents from "./ClickEvents.js";
 import GeneralFunctions from "./GeneralFunctions.js";
+import LoadData from "./LoadData.js";
 
 const click = new ClickEvents();
+const loadData = new LoadData();
 const generalFunctions = new GeneralFunctions();
 
 function clickPlanning (event) {
@@ -20,6 +22,8 @@ function clickReflecting (event) {
 }
 
 window.onload = async function () {
+    localStorage.setItem("activeElement", "tips");
+    loadData.updateNextPhaseStatus();
     generalFunctions.toggleDarkmode();
 }
 

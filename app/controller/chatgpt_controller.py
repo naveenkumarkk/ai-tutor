@@ -124,7 +124,14 @@ def welcomescreen():
 def check_next_phase_status():
     data = request.json
     conversation_type = data.get('conversation_type')
-    return jsonify({'response':allow_next_phase(conversation_type)})
+    user_message = ""
+    allow_planning_phase, allow_monitoring_phase, allow_reflection_phase = get_phase_permissions(user_message, conversation_type)
+    return jsonify({
+        'allow_reflection_phase': allow_reflection_phase,
+        'allow_monitoring_phase':allow_monitoring_phase,
+        'allow_planning_phase': allow_planning_phase
+    })
+
 
 
     

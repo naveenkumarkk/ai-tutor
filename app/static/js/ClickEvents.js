@@ -4,7 +4,7 @@ class ClickEvents {
 
     clickPlanning() {
         if (localStorage.getItem('allowPlanningPhase') == 'true') {
-            if (localStorage.getItem('activeElement') !== 'planning') {
+            if (localStorage.getItem('activeElement') !== 'planning' && localStorage.getItem('activeElement') !== '' && localStorage.getItem('activeElement') !== 'tips') {
                 document.getElementById("promptInput").classList.remove("hidden");
             }
             document.getElementById("promptInput").classList.remove("hidden");
@@ -24,7 +24,7 @@ class ClickEvents {
 
     clickMonitoring() {
         if (localStorage.getItem('allowMonitoringPhase') == 'true') {
-            if (localStorage.getItem('activeElement') !== 'monitoring') {
+            if (localStorage.getItem('activeElement') !== 'monitoring'  && localStorage.getItem('activeElement') !== '' && localStorage.getItem('activeElement') !== 'tips') {
                 document.getElementById("promptInput").classList.remove("hidden");
             }
             let currentElement = document.getElementsByClassName("on");
@@ -41,7 +41,7 @@ class ClickEvents {
 
     clickReflecting() {
         if (localStorage.getItem('allowReflectionPhase') == 'true') {
-            if (localStorage.getItem('activeElement') !== 'reflecting') {
+            if (localStorage.getItem('activeElement') !== 'reflecting'  && localStorage.getItem('activeElement') !== '' && localStorage.getItem('activeElement') !== 'tips') {
                 document.getElementById("promptInput").classList.remove("hidden");
             }
             let currentElement = document.getElementsByClassName("on");
