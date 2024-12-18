@@ -986,6 +986,14 @@ input#darkmode-toggle {
   & .buttons{
     display: flex;
     align-self: center;
+    & button {
+      -webkit-box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
+      box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
+    }
+  }
+  & .answer {
+    max-width: 100% !important;
   }
 }
 
@@ -1188,7 +1196,7 @@ input#darkmode-toggle {
   backdrop-filter: blur(10px);
   text-align: center;
 
-  & button {
+  & button:hover {
     -webkit-box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
