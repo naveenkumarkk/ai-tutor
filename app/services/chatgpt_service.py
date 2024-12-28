@@ -69,7 +69,7 @@ def get_chatgpt_response(user_message, conversation_type, conversation_id, user_
         headers = {
             "Content-Type": "application/json",
             "User-Agent": "Insomnia/2023.5.6",
-            "api-key": os.getenv('CHAT_GPT_API_KEY'),
+            "api-key": os.getenv('CHAT_GPT_API_KEY','8c5567ebd69347cc8092ea4c55efeec9'),
         }
 
         # Make the POST request to ChatGPT API
