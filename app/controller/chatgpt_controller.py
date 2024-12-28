@@ -136,7 +136,7 @@ def check_next_phase_status():
     )
 
     if conversation_type == 'tips':
-        if allow_planning_phase and   and allow_reflection_phase:
+        if allow_planning_phase and allow_reflection_phase:
             allow_planning_phase = True
             allow_monitoring_phase = False
             allow_reflection_phase = False
