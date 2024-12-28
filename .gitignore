@@ -9,3 +9,6 @@
 /app/__pycache__
 /app/migrations/versions
 client_secret.json
+app/application.log
+/app/controller/__pycache__
+/app/services/__pycache__
