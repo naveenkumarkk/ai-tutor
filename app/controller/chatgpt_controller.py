@@ -109,6 +109,11 @@ def chatscreen():
 def tipsscreen():
     return render_template("tips.html")
 
+@chatgpt_bp.route("/tutorial")
+@login_required
+def tutorialscreen():
+    return render_template("tutorial.html")
+
 @chatgpt_bp.route("/help")
 @login_required
 def helpscreen():
