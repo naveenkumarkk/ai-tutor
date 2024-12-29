@@ -1183,22 +1183,66 @@ input#darkmode-toggle {
   top: 10%;
 }
 
+
 #stepButtons {
-  position: absolute;
-  right: 0;
-  bottom: 0;
   display: flex;
-  flex-direction: column;
-  width: 20%;
-  border-top-left-radius: 25px;
+  justify-content: space-between; /* Align buttons properly */
+  align-items: center;
+  position: fixed; /* Keep buttons at the bottom of the screen */
+  bottom: 20px; /* Position 20px above the bottom */
+  left: 10%;
+  width: 80%; /* Take 80% of the screen width */
   background-color: var(--message-background-color);
-  padding: 20px;
-  backdrop-filter: blur(10px);
-  text-align: center;
+  border-radius: 25px;
+  padding: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  z-index: 10;
 
   & button:hover {
     -webkit-box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 10px 17px -7px rgba(0, 0, 0, 0.75);
+  }
+}
+
+#stepButtons button {
+  all: unset; /* Remove default styles */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--button-background-color);
+  color: var(--text-color);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Circular buttons */
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#stepButtons button:hover {
+  background-color: var(--button-background-color-hover);
+  transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+#stepButtons button:disabled {
+  opacity: 0.5; /* Dim disabled buttons */
+  pointer-events: none; /* Prevent interaction */
+}
+
+
+@media (max-width: 600px) {
+  #stepButtons {
+    width: 100%; /* Full width on small screens */
+    left: 0;
+    bottom: 10px; /* Adjust spacing */
+    padding: 5px;
+  }
+
+  #stepButtons button {
+    width: 40px;
+    height: 40px;
+    font-size: 18px; 
   }
 }
