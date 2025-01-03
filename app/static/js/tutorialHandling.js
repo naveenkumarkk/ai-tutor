@@ -41,41 +41,41 @@ function showStep () {
             popup.innerText = "This is the reflecting section. After completing your tasks, we'll reflect on your work. I'll ask questions to help you identify what went well, what didn't, and what you can learn for next time. You have to finish the monitoring section first to gain access to the reflecting section.";
             alignRightMiddleToParent(popup, parentElement);
             break;
-        case 4: 
-            parentElement = document.getElementById("tips");
-            popup.classList = "step bottom left";
-            popup.style.marginBottom = "-10px";
-            popup.innerText = "This is the tips section. If you want to look up how the phases work, this is your place to go.";
-            alignRightBottomToParent(popup, parentElement);
-            break;
-        case 5:
+        // case 4: 
+        //     parentElement = document.getElementById("tips");
+        //     popup.classList = "step bottom left";
+        //     popup.style.marginBottom = "-10px";
+        //     popup.innerText = "This is the tips section. If you want to look up how the phases work, this is your place to go.";
+        //     alignRightBottomToParent(popup, parentElement);
+        //     break;
+        case 4:
             parentElement = document.getElementById("help");
             popup.classList = "step topTop leftTop";
             popup.style.marginBottom = "15px";
             popup.innerText = "This is the help section. If you want to know more about the AI Tutor you'll get the information here";
             alignTopLeftToParent(popup, parentElement);
             break;
-        case 6:
+        case 5:
             parentElement = document.getElementById("promptInput");
             popup.classList = "step topTop middleTop";
             popup.style.marginBottom = "5px";
             popup.innerText = "This is the inputfield. Here you can enter a prompt and I'll answer you.";
             alignTopMiddleToParent(popup, parentElement);
             break;
-        case 7:
+        case 6:
             parentElement = document.getElementById("menu");
             popup.classList = "step top leftLeft";
             popup.style.marginBottom = "5px";
             popup.innerText = "This is the menu. Here you can go to the help page, log out and switch between dark and light mode.";
             alignLeftTopToParent(popup, parentElement);
             break;
-        case 8:
+        case 7:
             parentElement = document.getElementById("tutorial2prompt");
             popup.classList = "step top leftLeft";
             popup.innerText = "This is our chat. Here you can see your prompts and my answers.";
             alignTopToParent(popup, parentElement)
             break;
-        case 9:
+        case 8:
             const parent = document.getElementById("messages1");
             console.log(parent)
             popup = addAnswer("We are now finished with the tutorial. Click on next to start planning!")
