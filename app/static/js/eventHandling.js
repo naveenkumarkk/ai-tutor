@@ -17,10 +17,10 @@ const staticMessages = {
 
 // Update static content dynamically
 function updateStaticContent(phase) {
-    const staticContent = document.getElementById("staticContent");
-    if (staticContent && staticMessages[phase]) {
-        staticContent.innerHTML = `<p>${staticMessages[phase]}</p>`;
-    }
+  const staticContent = document.getElementById("staticContent");
+  if (staticContent && staticMessages[phase]) {
+    staticContent.innerHTML = `<p>${staticMessages[phase]}</p>`;
+  }
 }
 
 function clickPlanning(event) {
@@ -58,7 +58,9 @@ function submitForm(event) {
   const prompt = new FormData(form).get("prompt");
 
   const keywords = ["completed", "finished", "done"];
-  const isPhaseCompleted = keywords.some(keyword => prompt.toLowerCase().includes(keyword));
+  const isPhaseCompleted = keywords.some(keyword =>
+    prompt.toLowerCase().includes(keyword)
+  );
 
   promptHandling.handlePrompt(prompt);
 
@@ -74,12 +76,16 @@ document.getElementById("monitoring").addEventListener("click", clickMonitoring)
 document.getElementById("reflecting").addEventListener("click", clickReflecting);
 document.getElementById("tips").addEventListener("click", clickTips);
 document.getElementById("promptInput").addEventListener("submit", submitForm);
+
 document.addEventListener("keydown", (event) => {
+  const textarea = document.getElementById("prompt");
   if (
     event.key === "Enter" &&
-    (event.metaKey || event.ctrlKey) &&
-    document.getElementById("prompt").value.trim() !== ""
+    !event.shiftKey &&
+    textarea === document.activeElement &&
+    textarea.value.trim() !== ""
   ) {
+    event.preventDefault();
     submitForm(event);
   }
 });
