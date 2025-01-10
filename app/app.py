@@ -13,7 +13,7 @@ app.config.from_object(Config)
 
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://admin:.rlXI0}1mq}gf+(Gp$DGA7<%#-.7@172.18.0.2/studybeam"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:root123@172.17.0.2/studybeam"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 app.secret_key = os.getenv("SECRET_KEY", "your-secure-key")
@@ -68,4 +68,4 @@ if __name__ == "__main__":
         app.logger.info("Creating database tables if not already created.")
         db.create_all()
     app.logger.info("Starting Flask application.")
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000,debug=True)

@@ -2,7 +2,7 @@ import os
 
 class Config:
     # MySQL database configuration
-    SQLALCHEMY_DATABASE_URI =  "mysql+pymysql://admin:.rlXI0}1mq}gf+(Gp$DGA7<%#-.7@mariadb-container/studybeam"
+    SQLALCHEMY_DATABASE_URI =  "mysql+pymysql://root:12345@mariadb-container/study-beam"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     AUTH_REDIRECT_URL = "http://localhost:5000/google/auth_callback"
