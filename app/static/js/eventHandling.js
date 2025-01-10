@@ -74,7 +74,7 @@ function submitForm(event) {
 document.getElementById("planning").addEventListener("click", clickPlanning);
 document.getElementById("monitoring").addEventListener("click", clickMonitoring);
 document.getElementById("reflecting").addEventListener("click", clickReflecting);
-document.getElementById("tips").addEventListener("click", clickTips);
+// document.getElementById("tips").addEventListener("click", clickTips);
 document.getElementById("promptInput").addEventListener("submit", submitForm);
 
 document.addEventListener("keydown", (event) => {

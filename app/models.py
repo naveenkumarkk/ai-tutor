@@ -1,5 +1,6 @@
 from datetime import datetime
 from extensions import db
+from sqlalchemy.types import JSON
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -33,10 +34,10 @@ class Conversation(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     started_at = db.Column(db.DateTime, default=datetime.utcnow)
     status = db.Column(db.Enum('ongoing', 'completed', 'paused', name='conversation_status'), default='ongoing')
-    conversation_type = db.Column(db.Enum('planning','monitoring','reflecting',name='conversation_type'),nullable = False)
-    # Relationship: One conversation can have many messages
+    conversation_type = db.Column(db.Enum('planning', 'monitoring', 'reflecting', name='conversation_type'), nullable=False)
+    state = db.Column(JSON, nullable=True) 
+    chatgpt_conversation_id = db.Column(db.String(255), nullable=True)
     messages = db.relationship('Message', backref='conversation', lazy=True)
-
     def __repr__(self):
         return f'<Conversation {self.conversation_id} for user {self.user_id}>'
 

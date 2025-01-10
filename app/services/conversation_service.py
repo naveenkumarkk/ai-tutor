@@ -15,6 +15,25 @@ def get_or_create_conversation(user_id,conversation_type):
 def get_conversation_status(user_id,conversation_type):
     return Conversation.query.filter_by(user_id=user_id, status='ongoing',conversation_type = conversation_type).first()
 
+def get_conversation_state(conversation_id):
+    try:
+        conversation = Conversation.query.filter_by(chatgpt_conversation_id=conversation_id).first()
+        return conversation.state if conversation else {}
+    except Exception as e:
+        raise Exception(f"Error retrieving conversation state: {str(e)}")
+
+def save_conversation_state(conversation_id, state,user_id,conversation_type):
+    try:
+        conversation = Conversation.query.filter_by(chatgpt_conversation_id=conversation_id).first()
+        if not conversation:
+            conversation = Conversation(chatgpt_conversation_id=conversation_id, state=state,user_id=user_id,status='ongoing',conversation_type=conversation_type)
+            db.session.add(conversation)
+        else:
+            conversation.state = state
+        db.session.commit()
+    except Exception as e:
+        raise Exception(f"Error saving conversation state: {str(e)}")
+
 def retrieve_user_ongoing_history_and_pair(user_id, conversation_id):
     return (
         Message.query.filter_by(user_id=user_id, conversation_id=conversation_id,)
